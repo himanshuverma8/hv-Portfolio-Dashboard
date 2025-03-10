@@ -11,11 +11,11 @@ async function fetchLeetcodeData(handle: string) {
         ]);
 
         // Extract solved problems data
-        const solvedStats = solvedData.data?.submitStats?.acSubmissionNum || [];
-        const totalSolved = solvedStats.find((stat: { difficulty: string; }) => stat.difficulty === "All")?.count || 0;
-        const easySolved = solvedStats.find((stat: { difficulty: string; }) => stat.difficulty === "Easy")?.count || 0;
-        const mediumSolved = solvedStats.find((stat: { difficulty: string; }) => stat.difficulty === "Medium")?.count || 0;
-        const hardSolved = solvedStats.find((stat: { difficulty: string; }) => stat.difficulty === "Hard")?.count || 0;
+        const solvedStats = solvedData.data.submitStats.acSubmissionNum;
+        const totalSolved = solvedStats.find(stat => stat.difficulty === "All")?.count || 0;
+        const easySolved = solvedStats.find(stat => stat.difficulty === "Easy")?.count || 0;
+        const mediumSolved = solvedStats.find(stat => stat.difficulty === "Medium")?.count || 0;
+        const hardSolved = solvedStats.find(stat => stat.difficulty === "Hard")?.count || 0;
 
         // Concatenated solved problems
         const solvedString = `${totalSolved} | ${easySolved} (easy) | ${mediumSolved} (medium) | ${hardSolved} (hard)`;
@@ -25,7 +25,7 @@ async function fetchLeetcodeData(handle: string) {
         const topPercentage = contestData.data?.userContestRanking?.topPercentage || 0;
 
         // Extract last submission
-        const lastSubmission = submissionsData.data?.length > 0 ? submissionsData.data[0]?.title || "No submissions found" : "No submissions found";
+        const lastSubmission = submissionsData.data.length > 0 ? submissionsData.data[0].title : "No submissions found";
 
         return { solvedString, maxRating, topPercentage, lastSubmission };
     } catch (error) {
@@ -35,24 +35,13 @@ async function fetchLeetcodeData(handle: string) {
 }
 
 // API Route
-export async function GET(req: NextRequest) {
-    try {
-        const { searchParams } = new URL(req.url);
-        const handle = searchParams.get("handle");
+export async function GET(req: NextRequest, { params }: { params: { handle: string } }) {
+    const handle = params.handle;
+    const data = await fetchLeetcodeData(handle);
 
-        if (!handle) {
-            return NextResponse.json({ error: "Handle is required" }, { status: 400 });
-        }
-
-        const data = await fetchLeetcodeData(handle);
-
-        if (data) {
-            return NextResponse.json(data);
-        } else {
-            return NextResponse.json({ error: "Failed to fetch LeetCode stats" }, { status: 500 });
-        }
-    } catch (error) {
-        console.error("Unexpected error:", error);
-        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    if (data) {
+        return NextResponse.json(data);
+    } else {
+        return NextResponse.json({ error: "Failed to fetch LeetCode stats" }, { status: 500 });
     }
 }

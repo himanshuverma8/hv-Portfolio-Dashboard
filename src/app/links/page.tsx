@@ -90,12 +90,15 @@ export default function GlowingEffectDemoSecond() {
         description4="Hi, There!!
 I'm pursuing Btech in Information Technology branch from Madan Mohan Malaviya University of Technology, Gorakhpur.
 I'm excited to learn more things related to tech that interest me the most."
+       heading5=""
+       description5=""
       />
  
       <GridItem
         area="md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]"
         iconsrc="https://files.hvin.tech/codechef.png"
         title="Codechef"
+        linkhref=""
         heading1="Username:"
         description1="hvin8"
         heading2="MaxRating:"
@@ -104,11 +107,14 @@ I'm excited to learn more things related to tech that interest me the most."
         description3={codechefData ? codechefData.lastContest : "fetching from api.."}
         heading4="Best Rank:"
         description4={codechefData ? codechefData.bestRankWithContest : "fetching from api.."}
+        heading5=""
+        description5=""
       />
  
       <GridItem
         area="md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]"
         iconsrc="https://files.hvin.tech/codeforces.png"
+        linkhref=""
         title="Codeforces"
         heading1="Username:"
         description1="himanshu_ver"
@@ -165,6 +171,7 @@ I'm excited to learn more things related to tech that interest me the most."
     title="LeetCode"
     heading1="Username:"
     description1="himanshuverma8"
+    linkhref="https://www.geeksforgeeks.org/user/himanshu_ver/"
     heading2="MaxRating:"
     description2={leetCodeData ? leetCodeData.maxRating : "fetching from api..."}
     heading3="Solved:"
@@ -182,6 +189,15 @@ I'm excited to learn more things related to tech that interest me the most."
     linkhref="https://open.spotify.com/playlist/1VgdBB6b6ule86Qmdp1jYz"
     title="Spotify"
     heading1={<SpotifyPlayer />}
+    description1=""
+    heading2=""
+    description2=""
+    heading3=""
+    description3=""
+    heading4=""
+    description4=""
+    heading5=""
+    description5=""
   />
 </ul>
      </div>
