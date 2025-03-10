@@ -1,7 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-const Input = ({ userid, platformname, imgpath, link }) => {
+// Define props interface
+interface InputProps {
+  userid: string;
+  platformname: string;
+  imgpath: string;
+  link: string;
+}
+
+const Input: React.FC<InputProps> = ({ userid, platformname, imgpath, link }) => {
   const copyToClipboard = () => {
     navigator.clipboard.writeText(link).then(() => {
       alert(`Link copied to clipboard: ${link}`);
@@ -49,8 +57,8 @@ const Input = ({ userid, platformname, imgpath, link }) => {
 };
 
 // Styled Components (Ensures No Tailwind Influence)
-const StyledWrapper = styled.div`
-  all: unset; /* Resets Tailwind styles */
+const StyledWrapper = styled.div<{ platformname: string }>`
+  all: unset;
   margin: 40px;
 
   .input__container {
