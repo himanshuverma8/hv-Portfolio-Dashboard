@@ -14,6 +14,8 @@ import { Card, CardDemo } from "@/components/ui/cardDemo";
 import axios from "axios";
 import ActiveVisitors from "@/components/ui/ActiveVisitors";
 import Footer from "@/components/ui/Footer";
+import { Loader } from "lucide-react";
+import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 
 export default function GlowingEffectDemoSecond() {
   const [codeforcesData, setCodeforcesData] = useState(null);
@@ -21,49 +23,45 @@ export default function GlowingEffectDemoSecond() {
   const [githubData, setGithubData] = useState(null);
   const [leetCodeData, setleetCodeData] = useState(null);
   const [gfgData, setgfgData] = useState(null);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const fetchCodeforcesData = async () => {
-      const data = await fetchCodeforcesStats("himanshu_ver");
-      setCodeforcesData(data); // Update state to trigger re-render
-    };
-
-    fetchCodeforcesData();
+    document.documentElement.classList.add("dark");
   }, []);
   useEffect(() => {
-    const fetchCodechefData = async () => {
-      const data = await fetchCodechefStats("hvin8");
-      setCodechefData(data);
+    const fetchData = async () => {
+      try {
+        const [cf, cc, gh, lc, gfg] = await Promise.all([
+          fetchCodeforcesStats("himanshu_ver"),
+          fetchCodechefStats("hvin8"),
+          fetchGithubStats("himanshuverma8"),
+          axios.get("/api/leetcode/himanshuverma8"),
+          axios.get("/api/gfg/himanshu_ver"),
+        ]);
+
+        setCodeforcesData(cf);
+        setCodechefData(cc);
+        setGithubData(gh);
+        setleetCodeData(lc.data);
+        setgfgData(gfg.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    fetchCodechefData();
+    fetchData();
   }, []);
-  useEffect(() => {
-    const fetchGithubData = async () => {
-      const data = await fetchGithubStats("himanshuverma8");
-      setGithubData(data);
-    };
 
-    fetchGithubData();
-  }, []);
-  useEffect(() => {
-    const fetchLeetCodeData = async () => {
-      const response = await axios.get("/api/leetcode/himanshuverma8");
-      const data = response.data;
-      setleetCodeData(data); 
-    };
-
-    fetchLeetCodeData();
-  }, []);
-  useEffect(() => {
-    const fetchGFGData = async () => {
-      const response = await axios.get("/api/gfg/himanshu_ver");
-      const data = response.data;
-      setgfgData(data); 
-    };
-
-    fetchGFGData();
-  }, []);
-  console.log(gfgData);
+  if (loading) {
+    return (
+      <BackgroundBeamsWithCollision>
+      <div className='flex items-center justify-center min-h-screen'>
+      <Loader className='size-10 animate-spin' />
+    </div>
+      </BackgroundBeamsWithCollision>
+    );
+  }
   return (
     <div className="main-container">
      <div className="logo-icon absolute top-5 left-4 w-fit rounded-full border-gray-600 p-0.5">
