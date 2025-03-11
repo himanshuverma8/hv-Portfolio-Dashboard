@@ -29,10 +29,11 @@ An interactive, visually appealing **personal dashboard** that dynamically fetch
 
 ---
 
-## ⚡ Getting Started  
+This project fetches data using the following APIs:
 
-### 1️⃣ Clone the Repository  
-
-```sh
-git clone https://github.com/yourusername/glowing-portfolio-dashboard.git
-cd glowing-portfolio-dashboard
+- **Codeforces API**  
+- **CodeChef API**  
+- **LeetCode API** (via custom `/api/leetcode` route)  
+- **GeeksforGeeks API**  
+- **GitHub API**  
+- **Spotify API(last.fm)**  
