@@ -16,7 +16,7 @@ An interactive, visually appealing **personal dashboard** that dynamically fetch
 
 ## 📸 Preview  
 
-![Dashboard Screenshot](https://your-image-link.com)  
+![Dashboard Screenshot](https://files.hvin.tech/hv-s-Portfolio-Dashboard.png)  
 
 ---
 
