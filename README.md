@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌟 Glowing Portfolio Dashboard  
 
-## Getting Started
+An interactive, visually appealing **personal dashboard** that dynamically fetches and displays statistics from **competitive programming platforms, GitHub, LinkedIn, and Spotify**. Designed with **Next.js, React, Tailwind CSS**, and **Lucide Icons**, this project features **real-time updates, a glowing UI, and dark mode support**.  
 
-First, run the development server:
+## 🚀 Features  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+✅ **Live Competitive Programming Stats** (Codeforces, CodeChef, LeetCode, GeeksforGeeks)  
+✅ **GitHub Insights** (Followers, Repositories, Activity)  
+✅ **LinkedIn Profile Overview**  
+✅ **Spotify Now Playing Widget** 🎵  
+✅ **Glowing UI Effects** for a futuristic feel  
+✅ **Dark Mode Toggle** 🌙  
+✅ **Real-time Active Visitors Count**  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📸 Preview  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+![Dashboard Screenshot](https://your-image-link.com)  
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Tech Stack  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Frontend:** React, Next.js, Tailwind CSS  
+- **UI Components:** Lucide Icons, Framer Motion  
+- **State Management:** Zustand  
+- **API Integration:** Axios, Custom Fetch Functions  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## ⚡ Getting Started  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 1️⃣ Clone the Repository  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```sh
+git clone https://github.com/yourusername/glowing-portfolio-dashboard.git
+cd glowing-portfolio-dashboard
