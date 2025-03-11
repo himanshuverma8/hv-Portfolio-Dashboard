@@ -19,7 +19,7 @@ export default function ActiveVisitors() {
         
         socket.on("new-user", (ip) => {
             toast.success(`New visitor joined ip: ${ip}`, {
-                duration: 1000, 
+                duration: 3000, 
             });
         });
 
