@@ -16,6 +16,7 @@ import ActiveVisitors from "@/components/ui/ActiveVisitors";
 import Footer from "@/components/ui/Footer";
 import { Loader } from "lucide-react";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
+import ColourfulText from "@/components/ui/colourful-text";
 
 export default function GlowingEffectDemoSecond() {
   const [codeforcesData, setCodeforcesData] = useState(null);
@@ -61,7 +62,9 @@ export default function GlowingEffectDemoSecond() {
     </div>
       </BackgroundBeamsWithCollision>
     );
-  }
+  }else{
+    document.documentElement.classList.remove("dark");
+  } 
   return (
     <div className="main-container">
      <div className="logo-icon absolute top-5 left-4 w-fit rounded-full border-gray-600 p-0.5">
@@ -263,7 +266,7 @@ const GridItem = ({ area, iconsrc,linkhref, title, heading1,heading2,heading3,he
             </div>
             <div className="space-y-3">
               <h3 className="pt-0.5 text-xl/[1.375rem] font-semibold font-sans -tracking-4 md:text-2xl/[1.875rem] text-balance text-black dark:text-white">
-                {title}
+               <ColourfulText text={title}/>
               </h3>
               <h2
                 className="[&_b]:md:font-semibold [&_strong]:md:font-semibold font-sans text-sm/[1.125rem] 
