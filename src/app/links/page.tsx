@@ -3,21 +3,24 @@ import { useEffect, useState } from "react";
 
 import { Box, Lock, Search, Settings, Sparkles } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
-//import {CardDemo} from "@/components/ui/cardDemo";
 import DarkModeButton from "@/components/ui/darkModeButton";
 import SpotifyPlayer from "@/components/ui/SpotifyLastFmWidget";
 import fetchCodeforcesStats from "../../utils/codeforcesApi";
 import fetchCodechefStats from "../../utils/codechefApi";
 import fetchGithubStats  from "../../utils/githubApi";
 import fetchLeetcodeStats from "../../utils/leetcodeApi";
+import fetchGFGStats from "../../utils/gfgApi";
 import { Card, CardDemo } from "@/components/ui/cardDemo";
 import axios from "axios";
+import ActiveVisitors from "@/components/ui/ActiveVisitors";
+import Footer from "@/components/ui/Footer";
 
 export default function GlowingEffectDemoSecond() {
   const [codeforcesData, setCodeforcesData] = useState(null);
   const [codechefData, setCodechefData] = useState(null);
   const [githubData, setGithubData] = useState(null);
   const [leetCodeData, setleetCodeData] = useState(null);
+  const [gfgData, setgfgData] = useState(null);
   useEffect(() => {
     const fetchCodeforcesData = async () => {
       const data = await fetchCodeforcesStats("himanshu_ver");
@@ -29,7 +32,7 @@ export default function GlowingEffectDemoSecond() {
   useEffect(() => {
     const fetchCodechefData = async () => {
       const data = await fetchCodechefStats("hvin8");
-      setCodechefData(data); // Update state to trigger re-render
+      setCodechefData(data);
     };
 
     fetchCodechefData();
@@ -37,7 +40,7 @@ export default function GlowingEffectDemoSecond() {
   useEffect(() => {
     const fetchGithubData = async () => {
       const data = await fetchGithubStats("himanshuverma8");
-      setGithubData(data); // Update state to trigger re-render
+      setGithubData(data);
     };
 
     fetchGithubData();
@@ -46,15 +49,23 @@ export default function GlowingEffectDemoSecond() {
     const fetchLeetCodeData = async () => {
       const response = await axios.get("/api/leetcode/himanshuverma8");
       const data = response.data;
-      setleetCodeData(data); // Update state to trigger re-render
+      setleetCodeData(data); 
     };
 
     fetchLeetCodeData();
   }, []);
-  console.log(leetCodeData);
+  useEffect(() => {
+    const fetchGFGData = async () => {
+      const response = await axios.get("/api/gfg/himanshu_ver");
+      const data = response.data;
+      setgfgData(data); 
+    };
+
+    fetchGFGData();
+  }, []);
+  console.log(gfgData);
   return (
     <div className="main-container">
-     <div>
      <div className="logo-icon absolute top-5 left-4 w-fit rounded-full border-gray-600 p-0.5">
   <GlowingEffect
     blur={1}
@@ -75,62 +86,9 @@ export default function GlowingEffectDemoSecond() {
 
          <DarkModeButton style={{ position: 'absolute', top: '20px', right: '16px' }} />
          <ul className="pt-24 grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:max-h-[34rem] xl:grid-rows-2">
+          <ActiveVisitors/>
       <GridItem
         area="md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]"
-        iconsrc="https://files.hvin.tech/linkedin.png"
-        linkhref="https://www.linkedin.com/in/himanshuver/"
-        title="Linkedin"
-        heading1="Username:"
-        description1="himanshu_ver"
-        heading2="Followers:"
-        description2="595"
-        heading3="Connections:"
-        description3="494"
-         heading4="About:"
-        description4="Hi, There!!
-I'm pursuing Btech in Information Technology branch from Madan Mohan Malaviya University of Technology, Gorakhpur.
-I'm excited to learn more things related to tech that interest me the most."
-       heading5=""
-       description5=""
-      />
- 
-      <GridItem
-        area="md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]"
-        iconsrc="https://files.hvin.tech/codechef.png"
-        title="Codechef"
-        linkhref=""
-        heading1="Username:"
-        description1="hvin8"
-        heading2="MaxRating:"
-        description2={codechefData ? codechefData.maxRating : "fetching from api.."}
-        heading3="Last Contest:"
-        description3={codechefData ? codechefData.lastContest : "fetching from api.."}
-        heading4="Best Rank:"
-        description4={codechefData ? codechefData.bestRankWithContest : "fetching from api.."}
-        heading5=""
-        description5=""
-      />
- 
-      <GridItem
-        area="md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]"
-        iconsrc="https://files.hvin.tech/codeforces.png"
-        linkhref=""
-        title="Codeforces"
-        heading1="Username:"
-        description1="himanshu_ver"
-        heading2="MaxRating:"
-        description2={codeforcesData ? codeforcesData.maxRatingWithRank : "fetching from api..."} // Ensuring it doesn't break
-        heading3="Solved:"
-        description3="517"
-        heading4="Friends Of:"
-        description4="13"
-        heading5="Best Rank:"
-        description5={codeforcesData ? `${codeforcesData.bestRank} | ${codeforcesData.bestContest}` : "fetching from api..."}
-
-      />
- 
-      <GridItem
-        area="md:[grid-area:2/7/3/13] xl:[grid-area:1/8/2/13]"
         iconsrc="https://upload.wikimedia.org/wikipedia/commons/a/ae/Github-desktop-logo-symbol.svg"
         linkhref="https://github.com/himanshuverma8"
         title="Github"
@@ -148,20 +106,73 @@ I'm excited to learn more things related to tech that interest me the most."
       />
  
       <GridItem
+        area="md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]"
+        iconsrc="https://files.hvin.tech/codechef.png"
+        title="Codechef"
+        linkhref="https://www.codechef.com/users/hvin8"
+        heading1="Username:"
+        description1="hvin8"
+        heading2="MaxRating:"
+        description2={codechefData ? codechefData.maxRating : "fetching from api..."}
+        heading3="Last Contest:"
+        description3={codechefData ? codechefData.lastContest : "fetching from api..."}
+        heading4="Best Rank:"
+        description4={codechefData ? codechefData.bestRankWithContest : "fetching from api..."}
+        heading5=""
+        description5=""
+      />
+ 
+      <GridItem
+        area="md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]"
+        iconsrc="https://files.hvin.tech/codeforces.png"
+        linkhref="https://codeforces.com/profile/himanshu_ver"
+        title="Codeforces"
+        heading1="Username:"
+        description1="himanshu_ver"
+        heading2="MaxRating:"
+        description2={codeforcesData ? codeforcesData.maxRatingWithRank : "fetching from api..."} // Ensuring it doesn't break
+        heading3="Solved:"
+        description3="517"
+        heading4="Friends Of:"
+        description4="13"
+        heading5="Best Rank:"
+        description5={codeforcesData ? `${codeforcesData.bestRank} | ${codeforcesData.bestContest}` : "fetching from api..."}
+      />
+ 
+      <GridItem
+        area="md:[grid-area:2/7/3/13] xl:[grid-area:1/8/2/13]"
+        iconsrc="https://files.hvin.tech/linkedin.png"
+        linkhref="https://www.linkedin.com/in/himanshuver/"
+        title="Linkedin"
+        heading1="Username:"
+        description1="himanshu_ver"
+        heading2="Followers:"
+        description2="594"
+        heading3="Connections:"
+        description3="494"
+         heading4="About:"
+        description4="Hi, There!!
+I'm pursuing Btech in Information Technology branch from Madan Mohan Malaviya University of Technology, Gorakhpur.
+I'm excited to learn more things related to tech that interest me the most."
+       heading5=""
+       description5=""
+      />
+ 
+      <GridItem
         area="md:[grid-area:3/1/4/13] xl:[grid-area:2/8/3/13]"
         iconsrc="https://files.hvin.tech/gfg.png"
         linkhref="https://www.geeksforgeeks.org/user/himanshu_ver/"
         title="GFG"
         heading1="Username:"
         description1="himanshu_ver"
-        heading2="MaxRating:"
-        description2="null"
-        heading3="Solved:"
-        description3="264"
+        heading2="Solved"
+        description2={gfgData ? gfgData.totalProblemsSolved : "fetching from api..."}
+        heading3="MaxStreak:"
+        description3={gfgData ? gfgData.currentStreak : "fetching from api..."}
         heading4="Coding Score:"
-        description4="13"
-        heading5="Streak:"
-        description5="13"
+        description4={gfgData ? gfgData.codingScore : "fetching from api..."}
+        heading5=""
+        description5=""
       />
     </ul>
     <ul className="pt-10 grid grid-cols-1 gap-4 md:grid-cols-12 lg:gap-4 xl:max-h-[34rem]">
@@ -171,7 +182,7 @@ I'm excited to learn more things related to tech that interest me the most."
     title="LeetCode"
     heading1="Username:"
     description1="himanshuverma8"
-    linkhref="https://www.geeksforgeeks.org/user/himanshu_ver/"
+    linkhref="https://leetcode.com/himanshuverma8/"
     heading2="MaxRating:"
     description2={leetCodeData ? leetCodeData.maxRating : "fetching from api..."}
     heading3="Solved:"
@@ -200,9 +211,9 @@ I'm excited to learn more things related to tech that interest me the most."
     description5=""
   />
 </ul>
-     </div>
 
   <CardDemo />
+  <Footer />
     </div>
   );
 }
