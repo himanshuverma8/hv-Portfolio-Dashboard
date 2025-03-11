@@ -1,4 +1,4 @@
-# 🌟 Glowing Portfolio Dashboard  
+# 🌟Portfolio Dashboard  
 
 An interactive, visually appealing **personal dashboard** that dynamically fetches and displays statistics from **competitive programming platforms, GitHub, LinkedIn, and Spotify**. Designed with **Next.js, React, Tailwind CSS**, and **Lucide Icons**, this project features **real-time updates, a glowing UI, and dark mode support**.  
 
