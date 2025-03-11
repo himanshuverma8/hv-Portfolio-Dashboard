@@ -7,7 +7,7 @@ An interactive, visually appealing **personal dashboard** that dynamically fetch
 ✅ **Live Competitive Programming Stats** (Codeforces, CodeChef, LeetCode, GeeksforGeeks)  
 ✅ **GitHub Insights** (Followers, Repositories, Activity)  
 ✅ **LinkedIn Profile Overview**  
-✅ **Spotify Now Playing Widget** 🎵  
+✅ **Spotify Realtime Now Playing Widget And Recent Played Songs** 🎵  
 ✅ **Glowing UI Effects** for a futuristic feel  
 ✅ **Dark Mode Toggle** 🌙  
 ✅ **Real-time Active Visitors Count Using Websocket(Socket.IO)**  
