@@ -2,10 +2,6 @@ import mongoose from 'mongoose';
 
 export async function connect() {
     try {
-        if (mongoose.connection.readyState >= 1) {
-            console.log('✅ Already connected to MongoDB.');
-            return;
-        }
         console.log(process.env.MONGO_URI!)
         await mongoose.connect(process.env.MONGO_URI!);
         const connection = mongoose.connection;
