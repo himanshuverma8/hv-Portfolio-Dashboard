@@ -6,9 +6,6 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true, // Ignores TypeScript errors during the build process
   },
-  env: {
-    MONGO_URI: process.env.MONGO_URI, // Ensure it's accessible in the app
-  },
 };
 
 export default nextConfig;
