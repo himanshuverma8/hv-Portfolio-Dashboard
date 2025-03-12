@@ -3,7 +3,7 @@ import UniqueViews from "@/model/UniqueViews";
 import { connect } from "@/dbConfig/dbConfig";
 
 // Ensure database connection
-connect();
+await connect();
 
 export async function POST(req: NextRequest) {
     try {
