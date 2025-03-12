@@ -17,8 +17,9 @@ import Footer from "@/components/ui/Footer";
 import { Loader } from "lucide-react";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import ColourfulText from "@/components/ui/colourful-text";
-
+import { connect } from "@/dbConfig/dbConfig";
 export default function GlowingEffectDemoSecond() {
+ // console.log(process.env.MONGO_URI);
   const [codeforcesData, setCodeforcesData] = useState(null);
   const [codechefData, setCodechefData] = useState(null);
   const [githubData, setGithubData] = useState(null);

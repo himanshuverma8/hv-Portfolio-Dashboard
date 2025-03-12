@@ -1,26 +1,29 @@
 "use client";
-
-import { div, h2 } from "motion/react-client";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import toast from "react-hot-toast";
+import axios from "axios";
+import { useVisitorStore } from "@/app/store/useVisitorStore.ts";
 
 export default function ActiveVisitors() {
-    const [activeUsers, setActiveUsers] = useState(0);
+    const {activeUsers, setActiveUsers} = useVisitorStore();
 
     useEffect(() => {
         const socket = io("https://real-time-active-visitors-count-backend.onrender.com/", { transports: ["websocket"] });
 
-        
+        // Listen for active users count
         socket.on("active-users", (count) => {
             setActiveUsers(count);
         });
 
-        
-        socket.on("new-user", (ip) => {
-            toast.success(`New visitor joined ip: ${ip}`, {
-                duration: 3000, 
-            });
+        // Listen for new user connections
+        socket.on("new-user", async (ip) => {
+            try {
+                await axios.post("/api/save-user-ip", { ip }); // Save to database via API route
+                toast.success(`New visitor joined IP: ${ip}`, { duration: 3000 });
+            } catch (error) {
+                console.error("Failed to save visitor:", error);
+            }
         });
 
         return () => {
@@ -29,11 +32,11 @@ export default function ActiveVisitors() {
     }, []);
 
     return (
-       <div className="absolute top-5 left-1/2 transform -translate-x-1/2 ">
-        <div className="flex items-center justify-center">
-            <h2 className="w-2 h-2 border-green-500 p-0.5 bg-green-500 rounded-full"></h2>
-            <h2 className="text-xs ml-1">{`Active Visitors: ${activeUsers}`}</h2>
+        <div className="absolute top-5 left-1/2 transform -translate-x-1/2">
+            <div className="flex items-center justify-center">
+                <h2 className="w-2 h-2 border-green-500 p-0.5 bg-green-500 rounded-full"></h2>
+                <h2 className="text-xs ml-1">{`Active Visitors: ${activeUsers}`}</h2>
+            </div>
         </div>
-       </div>
     );
 }
