@@ -20,15 +20,14 @@ import {
 const Footer: React.FC = () => {
   const [uniqueViews, setUniqueViews] = useState<number>(0);
   const { activeUsers } = useVisitorStore();
-  const [ipDetails, setipDetails] =  useState<object>({});
+  const [ipDetails, setIpDetails] = useState<object[]>([]);
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const getUniqueViews = async () => {
       try {
         const response = await axios.get("/api/unique-views");
         setUniqueViews(response.data.totalVisits);
-        setipDetails(response.data.ipDetails);
-        console.log(ipDetails)
       } catch (error) {
         console.error("Error fetching unique views:", error);
       }
@@ -36,6 +35,23 @@ const Footer: React.FC = () => {
 
     getUniqueViews();
   }, [activeUsers]);
+
+  useEffect(() => {
+    if (isDialogOpen) {
+      const fetchIpDetails = async () => {
+        try {
+          const response = await axios.get("/api/unique-views", {
+            params: { fetchIPDetails: true }
+          });
+          setIpDetails(response.data.ipDetails);
+        } catch (error) {
+          console.error("Error fetching IP details:", error);
+        }
+      };
+
+      fetchIpDetails();
+    }
+  }, [isDialogOpen]);
 
   return (
     <footer className="flex items-center justify-between bg-transparent w-full mx-auto p-4 dark:bg-transparent shadow-[2px_4px_16px_0px_rgba(248,248,248,0.06)_inset] group">
@@ -58,50 +74,52 @@ const Footer: React.FC = () => {
         <h1 className="text-xs font-bold text-center text-blue-500 relative z-2 font-sans">
           © {new Date().getFullYear()} <ColourfulText text="hv" />
         </h1>
-        <Dialog>
-      <DialogTrigger asChild>
-        <button className="text-xs text-center text-green-500 hover:cursor-pointer hover:text-red-500">
-       
-          Unique Views: {uniqueViews} 
-          
-        </button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[500px] max-h-[80vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle></DialogTitle>
-          <DialogDescription>
-            
-          </DialogDescription>
-        </DialogHeader>
+        <Dialog onOpenChange={setIsDialogOpen}>
+          <DialogTrigger asChild>
+            <button
+              className="text-xs text-center text-green-500 hover:cursor-pointer hover:text-red-500"
+              onTouchStart={(e) => e.currentTarget.classList.add("text-red-500")}
+              onMouseLeave={(e) => e.currentTarget.classList.remove("text-red-500")}
+            >
+              Unique Views: {uniqueViews}
+            </button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[500px] max-h-[80vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle></DialogTitle>
+              <DialogDescription>
+                
+              </DialogDescription>
+            </DialogHeader>
 
-        {/* Scrollable Container */}
-        <div className="max-h-[60vh] overflow-y-auto space-y-2">
-          {ipDetails.length > 0 ? (
-              ipDetails
-              .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) 
-              .map((ipInfo, index) => (
-              <div key={index} className="border p-2 rounded-md">
-                <p><strong>Time:</strong> {dayjs(ipInfo.createdAt).fromNow()}</p>
-                <p><strong>IP:</strong> {ipInfo.ip}</p>
-                <p><strong>City:</strong> {ipInfo.city}</p>
-                <p><strong>Region:</strong> {ipInfo.region}</p>
-                <p><strong>Country:</strong> {ipInfo.country}</p>
-                <p><strong>Location:</strong> {ipInfo.loc}</p>
-                <p><strong>Org:</strong> {ipInfo.org}</p>
-                <p><strong>Postal Code:</strong> {ipInfo.postal}</p>
-                <p><strong>Timezone:</strong> {ipInfo.timezone}</p>
-              </div>
-            ))
-          ) : (
-            <p className="text-gray-500">Loading...</p>
-          )}
-        </div>
+            {/* Scrollable Container */}
+            <div className="max-h-[60vh] overflow-y-auto space-y-2">
+              {ipDetails.length > 0 ? (
+                  ipDetails
+                  .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) 
+                  .map((ipInfo, index) => (
+                  <div key={index} className="border p-2 rounded-md">
+                    <p><strong>Time:</strong> {dayjs(ipInfo.createdAt).fromNow()}</p>
+                    <p><strong>IP:</strong> {ipInfo.ip}</p>
+                    <p><strong>City:</strong> {ipInfo.city}</p>
+                    <p><strong>Region:</strong> {ipInfo.region}</p>
+                    <p><strong>Country:</strong> {ipInfo.country}</p>
+                    <p><strong>Location:</strong> {ipInfo.loc}</p>
+                    <p><strong>Org:</strong> {ipInfo.org}</p>
+                    <p><strong>Postal Code:</strong> {ipInfo.postal}</p>
+                    <p><strong>Timezone:</strong> {ipInfo.timezone}</p>
+                  </div>
+                ))
+              ) : (
+                <p className="text-gray-500">Loading...</p>
+              )}
+            </div>
 
-        <DialogFooter>
-          <button className="text-sm text-blue-500">Close</button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+            <DialogFooter>
+              <button className="text-sm text-blue-500">Close</button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
       <div className="end flex items-center justify-center">
         <a href="mailto:hvinprimary@gmail.com"><p className="text-xs text-center text-blue-500 hover:text-blue-600 transition-transform duration-200 hover:scale-115">Collaborate with me!</p></a>
