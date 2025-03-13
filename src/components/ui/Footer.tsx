@@ -81,7 +81,7 @@ const Footer: React.FC = () => {
               onTouchStart={(e) => e.currentTarget.classList.add("text-red-500")}
               onMouseLeave={(e) => e.currentTarget.classList.remove("text-red-500")}
             >
-              Unique Views: {uniqueViews}
+              Unique Views: {uniqueViews>0 ? uniqueViews : "fetching..."}
             </button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[500px] max-h-[80vh] overflow-y-auto">
