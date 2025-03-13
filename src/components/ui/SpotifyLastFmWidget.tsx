@@ -1,55 +1,67 @@
 import React, { useState, useEffect } from "react";
 import { fetchNowPlaying, fetchRecentTracks } from "../../utils/spotifyService";
 
+interface Song {
+  name: string;
+  artist: string;
+  albumArt: string;
+  isPlaying?: boolean;
+}
+
 const SpotifyLastFmWidget: React.FC = () => {
-  const [currentSong, setCurrentSong] = useState<any>(null);
-  const [recentSongs, setRecentSongs] = useState<any[]>([]);
+  const [currentSong, setCurrentSong] = useState<Song | null>(null);
+  const [recentSongs, setRecentSongs] = useState<Song[]>([]);
 
   useEffect(() => {
     const loadData = async () => {
-      const nowPlaying = await fetchNowPlaying();
-      setCurrentSong(nowPlaying);
+      try {
+        const nowPlaying = await fetchNowPlaying();
+        if (nowPlaying) setCurrentSong(nowPlaying);
 
-      const recentTracks = await fetchRecentTracks();
-      setRecentSongs(recentTracks.slice(0, 2)); // Limit to 3 most recent songs
+        const recentTracks = await fetchRecentTracks();
+        if (recentTracks) setRecentSongs(recentTracks.slice(0, 3));
+      } catch (error) {
+        console.error("Error fetching Spotify data:", error);
+      }
     };
 
     loadData();
-    const interval = setInterval(loadData, 30000); // Auto-refresh every 30s
+    const interval = setInterval(loadData, 3000); 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="bg-transparent">
+    <div className="bg-transparent p-4">
       <h2 className="text-lg font-bold">🎵 Now Playing</h2>
-      {currentSong ? (
+
+      {currentSong?.isPlaying ? (
         <div className="flex items-center mt-2">
           <img src={currentSong.albumArt} alt="Album Art" className="w-16 h-16 rounded-lg" />
           <div className="ml-3">
             <p className="text-sm font-bold">{currentSong.name}</p>
             <p className="text-xs">{currentSong.artist}</p>
-            {currentSong.isPlaying ? (
-              <span className="text-green-400 text-xs">Now Playing...</span>
-            ) : (
-              <span className="text-green-400 text-xs">Paused</span>
-            )}
+            <span className="text-green-400 text-xs">Now Playing...</span>
           </div>
         </div>
       ) : (
-        <p className="text-sm">No song is playing</p>
+        <p className="text-sm text-gray-400">No song is currently playing</p>
       )}
 
       <h2 className="mt-4 text-lg font-bold">🔄 Recently Played</h2>
       <ul className="mt-2 space-y-2">
-        {recentSongs.map((song, index) => (
-          <li key={index} className="flex items-center">
-            <img src={song.albumArt} alt="Album Art" className="w-10 h-10 rounded-md" />
-            <div className="ml-2">
-              <p className="text-sm font-bold">{song.name}</p>
-              <p className="text-xs">{song.artist}</p>
-            </div>
-          </li>
-        ))}
+        {recentSongs.length > 0 ? (
+          recentSongs.map((song, index) => (
+            <li key={index} className="flex items-center">
+              <img src={song.albumArt} alt="Album Art" className="w-10 h-10 rounded-md" />
+              <div className="ml-2">
+                <p className="text-sm font-bold">{song.name}</p>
+                <p className="text-xs">{song.artist}</p>
+              </div>
+            </li>
+          ))
+        ) : (
+          <p className="text-sm text-gray-400">No recent songs found</p>
+        )}
       </ul>
     </div>
   );
