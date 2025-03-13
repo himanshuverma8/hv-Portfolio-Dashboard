@@ -74,7 +74,7 @@ const Footer: React.FC = () => {
         <h1 className="text-xs font-bold text-center text-blue-500 relative z-2 font-sans">
           © {new Date().getFullYear()} <ColourfulText text="hv" />
         </h1>
-        <Dialog onOpenChange={setIsDialogOpen}>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <button
               className="text-xs text-center text-green-500 hover:cursor-pointer hover:text-red-500"
@@ -116,7 +116,9 @@ const Footer: React.FC = () => {
             </div>
 
             <DialogFooter>
-              <button className="text-sm text-blue-500">Close</button>
+            <button onClick={() => setIsDialogOpen(false)} className="text-sm text-blue-500 hover:text-blue-600 hover:cursor-pointer">
+            Close
+          </button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
