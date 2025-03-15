@@ -132,11 +132,11 @@ export default function GlowingEffectDemoSecond() {
         heading1="Username:"
         description1="himanshu_ver"
         heading2="MaxRating:"
-        description2={codeforcesData ? codeforcesData.maxRatingWithRank : "fetching from api..."} // Ensuring it doesn't break
+        description2={codeforcesData ? codeforcesData.maxRatingWithRank : "api error..."} // Ensuring it doesn't break
         heading3="Solved:"
-        description3={codeforcesData ? codeforcesData.totalSolved : "fetching from api..."}
+        description3={codeforcesData ? codeforcesData.totalSolved : "api error..."}
         heading4="Friends Of:"
-        description4={codeforcesData ? codeforcesData.friendsCount : "fetching from api..."}
+        description4={codeforcesData ? codeforcesData.friendsCount : "api error..."}
         heading5="Best Rank:"
         description5={codeforcesData ? `${codeforcesData.bestRank} | ${codeforcesData.bestContest}` : "fetching from api..."}
       />

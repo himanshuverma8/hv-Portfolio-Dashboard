@@ -35,7 +35,7 @@ export default function ActiveVisitors() {
         <div className="absolute top-5 left-1/2 transform -translate-x-1/2">
             <div className="flex items-center justify-center">
                 <h2 className="w-2 h-2 border-green-500 p-0.5 bg-green-500 rounded-full"></h2>
-                <h2 className="text-xs ml-1">{`Active Visitors: ${activeUsers}`}</h2>
+                <h2 className="text-xs ml-1">{`Active Visitors: ${activeUsers > 0 ? activeUsers : "fetching from render..."}`}</h2>
             </div>
         </div>
     );
