@@ -134,9 +134,9 @@ export default function GlowingEffectDemoSecond() {
         heading2="MaxRating:"
         description2={codeforcesData ? codeforcesData.maxRatingWithRank : "fetching from api..."} // Ensuring it doesn't break
         heading3="Solved:"
-        description3="517"
+        description3={codeforcesData ? codeforcesData.totalSolved : "fetching from api..."}
         heading4="Friends Of:"
-        description4="13"
+        description4={codeforcesData ? codeforcesData.friendsCount : "fetching from api..."}
         heading5="Best Rank:"
         description5={codeforcesData ? `${codeforcesData.bestRank} | ${codeforcesData.bestContest}` : "fetching from api..."}
       />
