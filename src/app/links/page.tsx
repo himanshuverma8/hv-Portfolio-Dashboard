@@ -18,6 +18,7 @@ import { Loader } from "lucide-react";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import ColourfulText from "@/components/ui/colourful-text";
 import { connect } from "@/dbConfig/dbConfig";
+import { LinkPreview } from "@/components/ui/link-preview";
 export default function GlowingEffectDemoSecond() {
  // console.log(process.env.MONGO_URI);
   const [codeforcesData, setCodeforcesData] = useState(null);
@@ -104,7 +105,7 @@ export default function GlowingEffectDemoSecond() {
         description4={githubData ? githubData.publicRepos : "fetching from api..."}
         heading5="Recent Updated Repo:"
         description5={githubData ? githubData.recentRepo : "fetching from api..."}
-    
+        
       />
  
       <GridItem
@@ -213,7 +214,6 @@ I'm excited to learn more things related to tech that interest me the most."
     description5=""
   />
 </ul>
-
   <CardDemo />
   <Footer />
     </div>
@@ -263,7 +263,11 @@ const GridItem = ({ area, iconsrc,linkhref, title, heading1,heading2,heading3,he
           proximity={64}
           inactiveZone={0.01}
         />
-            <a href={linkhref} target="_blank"> <img src={iconsrc} alt=""  style={{ height: "30px", width: "30px" }}/></a>
+       <LinkPreview
+          url={linkhref}  className="">  
+          <img src={iconsrc} alt=""  style={{ height: "30px", width: "30px" }}/> 
+          </LinkPreview>
+            
             </div>
             <div className="space-y-3">
               <h3 className="pt-0.5 text-xl/[1.375rem] font-semibold font-sans -tracking-4 md:text-2xl/[1.875rem] text-balance text-black dark:text-white">
