@@ -128,7 +128,7 @@ export default function GlowingEffectDemoSecond() {
       <GridItem
         area="md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]"
         iconsrc="https://files.hvin.tech/codeforces.png"
-        linkhref="https://codeforces.com/profile/himanshu_ver"
+        linkhref="https://codeforces.com/profile/himanshu_ver?mobile=false"
         title="Codeforces"
         heading1="Username:"
         description1="himanshu_ver"
