@@ -11,6 +11,9 @@ export default async function fetchCodechefStats(handle) {
             throw new Error("No contest data available");
         }
 
+        // Get the last index dynamically
+        const lastIndex = data.ratingData.length - 1;
+
         // Find the last contest based on the latest `end_date`
         const lastContest = data.ratingData.reduce((latest, contest) => 
             new Date(contest.end_date) > new Date(latest.end_date) ? contest : latest
@@ -21,12 +24,14 @@ export default async function fetchCodechefStats(handle) {
             parseInt(contest.rank) < parseInt(best.rank) ? contest : best
         , data.ratingData[0]);
 
-        console.log(data);
+        // Extract last contest time using last index
+        const lastContestTime = new Date(data.ratingData[lastIndex].end_date).toISOString();
 
         return {
             maxRating,
             lastContest: lastContest.name,
-            bestRankWithContest: `${bestRankContest.rank} | ${bestRankContest.name}`
+            bestRankWithContest: `${bestRankContest.rank} | ${bestRankContest.name}`,
+            lastContestTime // Now using the last index
         };
 
     } catch (error) {
