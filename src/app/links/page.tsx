@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
 import { Box, Lock, Search, Settings, Sparkles } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import DarkModeButton from "@/components/ui/darkModeButton";
@@ -27,6 +29,8 @@ export default function GlowingEffectDemoSecond() {
   const [leetCodeData, setleetCodeData] = useState(null);
   const [gfgData, setgfgData] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  
   useEffect(() => {
     document.documentElement.classList.add("dark");
   }, []);
@@ -68,7 +72,7 @@ export default function GlowingEffectDemoSecond() {
     document.documentElement.classList.remove("dark");
   } 
   return (
-    <div className="main-container">
+    <div className="main-container overflow-x-hidden ">
      <div className="logo-icon absolute top-5 left-4 w-fit rounded-full border-gray-600 p-0.5">
   <GlowingEffect
     blur={1}
@@ -95,17 +99,20 @@ export default function GlowingEffectDemoSecond() {
         iconsrc="https://upload.wikimedia.org/wikipedia/commons/a/ae/Github-desktop-logo-symbol.svg"
         linkhref="https://github.com/himanshuverma8"
         title="Github"
-        heading1="Username:"
-        description1="himanshuverma8"
-        heading2="Followers:"
-        description2={githubData ? githubData.followers : "fetching from api..."}
-        heading3="Following:"
-        description3={githubData ? githubData.following : "fetching from api..."}
-        heading4="Repos:"
-        description4={githubData ? githubData.publicRepos : "fetching from api..."}
-        heading5="Recent Updated Repo:"
-        description5={githubData ? githubData.recentRepo : "fetching from api..."}
-        
+        data={[
+          { heading: "Username:", description: "himanshuverma8" },
+          { heading: "Followers:", description: githubData ? githubData.followers : "fetching from api..." },
+          { heading: "Following:", description: githubData ? githubData.following : "fetching from api..." },
+          { heading: "Repos:", description: githubData ? githubData.publicRepos + githubData.privateRepos : "fetching from api..." },
+          { heading: "Recent Updated Repo:", description: githubData ? githubData.recentRepo : "fetching from api..." },
+          { heading: "Total Commits:", description: githubData ? githubData.totalCommits : "fetching from api..." },
+          { 
+            heading: "Recent Commit:", 
+            description: githubData 
+              ? `${githubData.recentCommit} (${dayjs(githubData.recentCommitTime).fromNow()})` 
+              : "fetching from api..."
+          }
+        ]}
       />
  
       <GridItem
@@ -113,16 +120,12 @@ export default function GlowingEffectDemoSecond() {
         iconsrc="https://files.hvin.tech/codechef.png"
         title="Codechef"
         linkhref="https://www.codechef.com/users/hvin8"
-        heading1="Username:"
-        description1="hvin8"
-        heading2="MaxRating:"
-        description2={codechefData ? codechefData.maxRating : "fetching from api..."}
-        heading3="Last Contest:"
-        description3={codechefData ? codechefData.lastContest : "fetching from api..."}
-        heading4="Best Rank:"
-        description4={codechefData ? codechefData.bestRankWithContest : "fetching from api..."}
-        heading5=""
-        description5=""
+        data={[
+          { heading: "Username:", description: "hvin8" },
+          { heading: "MaxRating:", description: codechefData ? codechefData.maxRating : "fetching from api..." },
+          { heading: "Last Contest:", description: codechefData ? `${codechefData.lastContest} (${dayjs(codechefData.lastContestTime).fromNow()})` : "fetching from api..." },
+          { heading: "Best Rank:", description: codechefData ? `${codechefData.bestRankWithContest} ` : "fetching from api..." }
+        ]}
       />
  
       <GridItem
@@ -130,16 +133,14 @@ export default function GlowingEffectDemoSecond() {
         iconsrc="https://files.hvin.tech/codeforces.png"
         linkhref="https://codeforces.com/profile/himanshu_ver"
         title="Codeforces"
-        heading1="Username:"
-        description1="himanshu_ver"
-        heading2="MaxRating:"
-        description2={codeforcesData ? codeforcesData.maxRatingWithRank : "api error..."} // Ensuring it doesn't break
-        heading3="Solved:"
-        description3={codeforcesData ? codeforcesData.totalSolved : "api error..."}
-        heading4="Friends Of:"
-        description4={codeforcesData ? codeforcesData.friendsCount : "api error..."}
-        heading5="Best Rank:"
-        description5={codeforcesData ? `${codeforcesData.bestRank} | ${codeforcesData.bestContest}` : "fetching from api..."}
+        data={[
+          { heading: "Username:", description: "himanshu_ver" },
+          { heading: "MaxRating:", description: codeforcesData ? codeforcesData.maxRatingWithRank : "api error..." },
+          { heading: "Solved:", description: codeforcesData ? codeforcesData.totalSolved : "api error..." },
+          { heading: "Friends Of:", description: codeforcesData ? codeforcesData.friendsCount : "api error..." },
+          { heading: "Best Rank:", description: codeforcesData ? `${codeforcesData.bestRank} | ${codeforcesData.bestContest}` : "fetching from api..." },
+          { heading: "Last Submission:", description: codeforcesData ? `${codeforcesData.lastSubmission.title} (${dayjs(codeforcesData.lastSubmission.timestamp).fromNow()})` : "fetching from api..." }
+        ]}
       />
  
       <GridItem
@@ -147,18 +148,12 @@ export default function GlowingEffectDemoSecond() {
         iconsrc="https://files.hvin.tech/linkedin.png"
         linkhref="https://www.linkedin.com/in/himanshuver/"
         title="Linkedin"
-        heading1="Username:"
-        description1="himanshu_ver"
-        heading2="Followers:"
-        description2="594"
-        heading3="Connections:"
-        description3="494"
-         heading4="About:"
-        description4="Hi, There!!
-I'm pursuing Btech in Information Technology branch from Madan Mohan Malaviya University of Technology, Gorakhpur.
-I'm excited to learn more things related to tech that interest me the most."
-       heading5=""
-       description5=""
+        data={[
+          { heading: "Username:", description: "himanshu_ver" },
+          { heading: "Followers:", description: "596" },
+          { heading: "Connections:", description: "496" },
+          { heading: "About:", description: "Hi, There!! I'm pursuing BTech in Information Technology from Madan Mohan Malaviya University of Technology, Gorakhpur. I'm excited to learn more things related to tech that interest me the most." }
+        ]}
       />
  
       <GridItem
@@ -166,34 +161,29 @@ I'm excited to learn more things related to tech that interest me the most."
         iconsrc="https://files.hvin.tech/gfg.png"
         linkhref="https://www.geeksforgeeks.org/user/himanshu_ver/"
         title="GFG"
-        heading1="Username:"
-        description1="himanshu_ver"
-        heading2="Solved"
-        description2={gfgData ? gfgData.totalProblemsSolved : "fetching from api..."}
-        heading3="MaxStreak:"
-        description3={gfgData ? gfgData.currentStreak : "fetching from api..."}
-        heading4="Coding Score:"
-        description4={gfgData ? gfgData.codingScore : "fetching from api..."}
-        heading5=""
-        description5=""
+        data={[
+          { heading: "Username:", description: "himanshu_ver" },
+          { heading: "Solved:", description: gfgData ? gfgData.totalProblemsSolved : "fetching from api..." },
+          { heading: "MaxStreak:", description: gfgData ? gfgData.currentStreak : "fetching from api..." },
+          { heading: "Coding Score:", description: gfgData ? gfgData.codingScore : "fetching from api..." }
+        ]}
       />
     </ul>
     <ul className="pt-10 grid grid-cols-1 gap-4 md:grid-cols-12 lg:gap-4 xl:max-h-[34rem]">
   <GridItem
     area="md:[grid-area:1/1/2/13] xl:[grid-area:1/1/2/13]" // Occupies all 12 columns
     iconsrc="https://files.hvin.tech/leetcode.png"
-    title="LeetCode"
-    heading1="Username:"
-    description1="himanshuverma8"
     linkhref="https://leetcode.com/himanshuverma8/"
-    heading2="MaxRating:"
-    description2={leetCodeData ? leetCodeData.maxRating : "fetching from api..."}
-    heading3="Solved:"
-    description3={leetCodeData ? leetCodeData.solvedString : "fetching from api..."}
-    heading4="Top%:"
-    description4={leetCodeData ? leetCodeData.topPercentage : "fetching from api..."}
-    heading5="Last Submission:"
-    description5={leetCodeData ? leetCodeData.lastSubmission : "fetching from api..."}
+    title="LeetCode"
+    data={[
+      { heading: "Username:", description: "himanshuverma8" },
+      { heading: "MaxRating:", description: leetCodeData ? leetCodeData.maxRating : "fetching from api..." },
+      { heading: "Solved:", description: leetCodeData ? leetCodeData.solvedString : "fetching from api..." },
+      { heading: "Top%:", description: leetCodeData ? leetCodeData.topPercentage : "fetching from api..." },
+      { heading: "Last Submission:", 
+        description: leetCodeData ? `${leetCodeData.lastSubmission} (${dayjs.unix(leetCodeData.lastSubmissionTime).fromNow()})` : "fetching from api..." 
+      }
+    ]}
   />
 </ul>
 <ul className="pt-10 grid grid-cols-1 gap-4 md:grid-cols-12 lg:gap-4 xl:max-h-[34rem]">
@@ -202,16 +192,9 @@ I'm excited to learn more things related to tech that interest me the most."
     iconsrc="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg"
     linkhref="https://open.spotify.com/playlist/1VgdBB6b6ule86Qmdp1jYz"
     title="Spotify"
-    heading1={<SpotifyPlayer />}
-    description1=""
-    heading2=""
-    description2=""
-    heading3=""
-    description3=""
-    heading4=""
-    description4=""
-    heading5=""
-    description5=""
+    data={[
+      { heading: "", description: <SpotifyPlayer /> }
+    ]}
   />
 </ul>
   <CardDemo />
@@ -220,24 +203,20 @@ I'm excited to learn more things related to tech that interest me the most."
   );
 }
 
+interface GridItemType {
+  heading: string | React.ReactNode;
+  description: string | React.ReactNode;
+}
+
 interface GridItemProps {
   area: string;
   iconsrc: string;
   linkhref: string;
   title: string;
-  description1: React.ReactNode;
-  description2: React.ReactNode;
-  description3: React.ReactNode;
-  description4: React.ReactNode;
-  description5: React.ReactNode;
-  heading1: React.ReactNode;
-  heading2: React.ReactNode;
-  heading3: React.ReactNode;
-  heading4: React.ReactNode;
-  heading5: React.ReactNode;
+  data: GridItemType[];
 }
 
-const GridItem = ({ area, iconsrc,linkhref, title, heading1,heading2,heading3,heading4,heading5, description1, description2, description3, description4, description5 }: GridItemProps) => {
+const GridItem = ({ area, iconsrc,linkhref, title, data }: GridItemProps) => {
   return (
     <li className={`min-h-[14rem] list-none ${area}`}>
       <div className="relative h-full rounded-2.5xl border  p-2  md:rounded-3xl md:p-3">
@@ -273,36 +252,16 @@ const GridItem = ({ area, iconsrc,linkhref, title, heading1,heading2,heading3,he
               <h3 className="pt-0.5 text-xl/[1.375rem] font-semibold font-sans -tracking-4 md:text-2xl/[1.875rem] text-balance text-black dark:text-white">
                <ColourfulText text={title}/>
               </h3>
-              <h2
+              {data && data.map((item,index) => 
+              (
+                <h2
                 className="[&_b]:md:font-semibold [&_strong]:md:font-semibold font-sans text-sm/[1.125rem] 
-              md:text-base/[1.375rem]  text-black dark:text-neutral-400"
+              md:text-base/[1.375rem]  text-black dark:text-neutral-400" key={index}
               >
-                <span className="font-bold">{heading1}</span> {description1}
+                <span className="font-bold">{item.heading}</span> {item.description}
               </h2>
-              <h2
-                className="[&_b]:md:font-semibold [&_strong]:md:font-semibold font-sans text-sm/[1.125rem] 
-              md:text-base/[1.375rem]  text-black dark:text-neutral-400"
-              >
-               <span className="font-bold">{heading2}</span> {description2}
-              </h2>
-              <h2
-                className="[&_b]:md:font-semibold [&_strong]:md:font-semibold font-sans text-sm/[1.125rem] 
-              md:text-base/[1.375rem]  text-black dark:text-neutral-400"
-              >
-               <span className="font-bold">{heading3}</span> {description3}
-              </h2>
-              <h2
-                className="[&_b]:md:font-semibold [&_strong]:md:font-semibold font-sans text-sm/[1.125rem] 
-              md:text-base/[1.375rem]  text-black dark:text-neutral-400"
-              >
-               <span className="font-bold">{heading4}</span> {description4}
-              </h2>
-              <h2
-                className="[&_b]:md:font-semibold [&_strong]:md:font-semibold font-sans text-sm/[1.125rem] 
-              md:text-base/[1.375rem]  text-black dark:text-neutral-400"
-              >
-               <span className="font-bold">{heading5}</span> {description5}
-              </h2>
+              )
+              )}
             </div>
           </div>
         </div>

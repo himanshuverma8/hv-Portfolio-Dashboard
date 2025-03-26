@@ -71,7 +71,7 @@ export const LinkPreview = ({
       "viewport.height": height * 3,
       "viewport.device": "desktop",
     });
-    src = `https://api.microlink.io/?${params}`;
+    src = `https://api.microlink.io/?${params}&force=true`;
   } else {
     src = imageSrc;
   }

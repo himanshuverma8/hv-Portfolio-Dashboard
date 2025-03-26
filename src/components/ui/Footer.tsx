@@ -4,7 +4,6 @@ import axios from "axios";
 import { useVisitorStore } from "@/app/store/useVisitorStore.ts";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { Eye } from "lucide-react";
 dayjs.extend(relativeTime);
 
 import {
