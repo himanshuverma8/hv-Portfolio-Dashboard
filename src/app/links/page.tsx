@@ -40,14 +40,14 @@ export default function GlowingEffectDemoSecond() {
         const [cf, cc, gh, lc, gfg] = await Promise.all([
           fetchCodeforcesStats("himanshu_ver"),
           fetchCodechefStats("hvin8"),
-          fetchGithubStats("himanshuverma8"),
+          axios.get("/api/github/himanshuverma8"),
           axios.get("/api/leetcode/himanshuverma8"),
           axios.get("/api/gfg/himanshu_ver"),
         ]);
 
         setCodeforcesData(cf);
         setCodechefData(cc);
-        setGithubData(gh);
+        setGithubData(gh.data);
         setleetCodeData(lc.data);
         setgfgData(gfg.data);
       } catch (error) {

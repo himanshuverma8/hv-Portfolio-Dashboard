@@ -1,10 +1,11 @@
+import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 
-export default async function fetchGithubStats(username) {
+async function fetchGithubStats(username) {
     try {
         const headers = {
             Accept: "application/vnd.github.v3+json",
-            Authorization: `token na`
+            Authorization: `token ${process.env.GITHUB_PAT}`
         };
 
         const { data: userData } = await axios.get(`https://api.github.com/users/${username}`, { headers });
@@ -77,5 +78,16 @@ export default async function fetchGithubStats(username) {
     } catch (error) {
         console.error("Error fetching GitHub stats:", error.message);
         return null;
+    }
+}
+
+export async function GET(req, { params }) {
+    const handle = params.handle;
+    const data = await fetchGithubStats(handle);
+
+    if (data) {
+        return NextResponse.json(data);
+    } else {
+        return NextResponse.json({ error: "Failed to fetch LeetCode stats" }, { status: 500 });
     }
 }
