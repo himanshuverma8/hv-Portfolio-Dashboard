@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 
-async function fetchLeetcodeData(handle: string) {
+async function fetchLeetcodeData(handle) {
     try {
         // Fetching data from LeetCode API
         const [solvedData, contestData, submissionsData] = await Promise.all([
@@ -16,18 +16,18 @@ async function fetchLeetcodeData(handle: string) {
         const easySolved = solvedStats.find(stat => stat.difficulty === "Easy")?.count || 0;
         const mediumSolved = solvedStats.find(stat => stat.difficulty === "Medium")?.count || 0;
         const hardSolved = solvedStats.find(stat => stat.difficulty === "Hard")?.count || 0;
-
-        // Concatenated solved problems
         const solvedString = `${totalSolved} | ${easySolved} (easy) | ${mediumSolved} (medium) | ${hardSolved} (hard)`;
 
-        // Extract contest stats
-        const maxRating = contestData.data?.userContestRanking?.rating || 0;
+        // Extract max rating from contest history
+        const history = contestData.data?.userContestRankingHistory || [];
+        const maxRating = history.length > 0 ? Math.max(...history.map(h => h.rating)) : 0;
         const topPercentage = contestData.data?.userContestRanking?.topPercentage || 0;
 
-        // Extract last submission
+        // Extract last submission and timestamp
         const lastSubmission = submissionsData.data.length > 0 ? submissionsData.data[0].title : "No submissions found";
+        const lastSubmissionTime = submissionsData.data.length > 0 ? submissionsData.data[0].timestamp : null;
 
-        return { solvedString, maxRating, topPercentage, lastSubmission };
+        return { solvedString, maxRating, topPercentage, lastSubmission, lastSubmissionTime };
     } catch (error) {
         console.error("Error fetching LeetCode stats:", error);
         return null;
@@ -35,7 +35,7 @@ async function fetchLeetcodeData(handle: string) {
 }
 
 // API Route
-export async function GET(req: NextRequest, { params }: { params: { handle: string } }) {
+export async function GET(req, { params }) {
     const handle = params.handle;
     const data = await fetchLeetcodeData(handle);
 
