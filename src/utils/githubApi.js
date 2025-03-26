@@ -1,12 +1,10 @@
 import axios from "axios";
 
-const GITHUB_TOKEN = process.env.GITHUB_PAT; // Store securely
-
 export default async function fetchGithubStats(username) {
     try {
         const headers = {
             Accept: "application/vnd.github.v3+json",
-            Authorization: `token ${GITHUB_TOKEN}`
+            Authorization: `token ${process.env.GITHUB_PAT}`
         };
 
         const { data: userData } = await axios.get(`https://api.github.com/users/${username}`, { headers });
