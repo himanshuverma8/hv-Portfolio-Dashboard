@@ -1,13 +1,18 @@
 import mongoose from "mongoose";
-
 const uniqueViewsSchema = new mongoose.Schema(
   {
     ip: { type: String, required: true, unique: true },
+    city: String,
+    region: String,
+    country: String,
+    location: String,
+    org: String,
+    postalCode: String,
+    timezone: String,
   },
   { timestamps: true }
 );
 
-// Use existing model if it exists, otherwise define a new one
 const UniqueViews = mongoose.models.UniqueViews || mongoose.model("UniqueViews", uniqueViewsSchema);
 
 export default UniqueViews;
