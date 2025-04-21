@@ -103,9 +103,10 @@ const Footer: React.FC = () => {
                     <p><strong>City:</strong> {ipInfo.city}</p>
                     <p><strong>Region:</strong> {ipInfo.region}</p>
                     <p><strong>Country:</strong> {ipInfo.country}</p>
-                    <p><strong>Location:</strong> {ipInfo.loc}</p>
+                    <p><strong>Location:</strong> {ipInfo.
+location}</p>
                     <p><strong>Org:</strong> {ipInfo.org}</p>
-                    <p><strong>Postal Code:</strong> {ipInfo.postal}</p>
+                    <p><strong>Postal Code:</strong> {ipInfo.postalCode}</p>
                     <p><strong>Timezone:</strong> {ipInfo.timezone}</p>
                   </div>
                 ))

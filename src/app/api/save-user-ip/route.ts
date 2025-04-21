@@ -23,9 +23,9 @@ export async function POST(req: NextRequest) {
             city: ipData.city || null,
             region: ipData.region || null,
             country: ipData.country || null,
-            loc: ipData.loc || null,
-            organization: ipData.org || null,
-            hostname: ipData.hostname || null,
+            location: ipData.loc || null,
+            org: ipData.org || null,
+            postalCode: ipData.postal || null,
             timezone: ipData.timezone || null,
         };
 
