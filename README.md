@@ -11,6 +11,7 @@ An interactive, visually appealing **personal dashboard** that dynamically fetch
 ✅ **Glowing UI Effects** for a futuristic feel  
 ✅ **Dark Mode Toggle** 🌙  
 ✅ **Real-time Active Visitors Count Using Websocket(Socket.IO)**  
+✅ **Redis Caching For Instant Look Up Of Ips and Pagination** 
 
 ---
 

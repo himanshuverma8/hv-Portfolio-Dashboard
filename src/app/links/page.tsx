@@ -21,6 +21,7 @@ import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-w
 import ColourfulText from "@/components/ui/colourful-text";
 import { connect } from "@/dbConfig/dbConfig";
 import { LinkPreview } from "@/components/ui/link-preview";
+import Script from 'next/script';
 export default function GlowingEffectDemoSecond() {
  // console.log(process.env.MONGO_URI);
   const [codeforcesData, setCodeforcesData] = useState(null);
@@ -60,15 +61,23 @@ export default function GlowingEffectDemoSecond() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+  if (!loading) {
+    // Remove/hide the loader element
+    const loader = document.getElementById("custom-loader");
+    if (loader) loader.remove(); // or loader.remove()
+  }
+}, [loading]);
+
   if (loading) {
-    return (
-      <BackgroundBeamsWithCollision>
-      <div className='flex items-center justify-center min-h-screen'>
-      <Loader className='size-10 animate-spin' />
-    </div>
-      </BackgroundBeamsWithCollision>
-    );
-  }else{
+  return (
+    <BackgroundBeamsWithCollision>
+      <div id="custom-loader"></div>
+      <Script src="https://unpkg.com/gsap@3/dist/gsap.min.js" strategy="beforeInteractive" />
+      <Script src="https://files.hvin.tech/hvloader.js" strategy="afterInteractive" />
+    </BackgroundBeamsWithCollision>
+  );
+}else{
     document.documentElement.classList.remove("dark");
   } 
   return (
