@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
@@ -22,7 +22,9 @@ import ColourfulText from "@/components/ui/colourful-text";
 import { connect } from "@/dbConfig/dbConfig";
 import { LinkPreview } from "@/components/ui/link-preview";
 import Script from 'next/script';
+import LogoAnimation from "@/components/LogoAnimation";
 export default function GlowingEffectDemoSecond() {
+
  // console.log(process.env.MONGO_URI);
   const [codeforcesData, setCodeforcesData] = useState(null);
   const [codechefData, setCodechefData] = useState(null);
@@ -92,17 +94,19 @@ export default function GlowingEffectDemoSecond() {
     proximity={64}
     inactiveZone={0.01}
   />
-  <img 
+   <LogoAnimation/>
+  {/* <img 
     src="https://files.hvin.tech/lighting_logo.png" 
+    
     alt=""  
     style={{ height: "50px", width: "50px" }}
-  />
+  /> */}
 </div>
-
 
          <DarkModeButton style={{ position: 'absolute', top: '20px', right: '16px' }} />
          <ul className="pt-24 grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:max-h-[34rem] xl:grid-rows-2">
           <ActiveVisitors/>
+         
       <GridItem
         area="md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]"
         iconsrc="https://upload.wikimedia.org/wikipedia/commons/a/ae/Github-desktop-logo-symbol.svg"
