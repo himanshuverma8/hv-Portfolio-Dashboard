@@ -23,6 +23,8 @@ import { connect } from "@/dbConfig/dbConfig";
 import { LinkPreview } from "@/components/ui/link-preview";
 import Script from 'next/script';
 import LogoAnimation from "@/components/LogoAnimation";
+import { animate, createScope, createSpring, createDraggable } from 'animejs';
+import AnimatedIcon from "@/components/AnimatedIcon";
 export default function GlowingEffectDemoSecond() {
 
  // console.log(process.env.MONGO_URI);
@@ -32,6 +34,8 @@ export default function GlowingEffectDemoSecond() {
   const [leetCodeData, setleetCodeData] = useState(null);
   const [gfgData, setgfgData] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  
 
   
   useEffect(() => {
@@ -231,7 +235,7 @@ interface GridItemProps {
 
 const GridItem = ({ area, iconsrc,linkhref, title, data }: GridItemProps) => {
   return (
-    <li className={`min-h-[14rem] list-none ${area}`}>
+    <li className={`min-h-[14rem] list-none ${area} grid-container`}>
       <div className="relative h-full rounded-2.5xl border  p-2  md:rounded-3xl md:p-3">
         <GlowingEffect
           blur={0}
@@ -244,7 +248,6 @@ const GridItem = ({ area, iconsrc,linkhref, title, data }: GridItemProps) => {
         />
         <div className="relative flex h-full flex-col justify-between gap-6 overflow-y-auto rounded-xl border-0.75 p-6  dark:shadow-[0px_0px_27px_0px_#2D2D2D] md:p-6">
           <div className="relative flex flex-1 flex-col justify-between gap-3">
-            
             <div className="relative w-fit rounded-lg border border-gray-600 p-2">
             <GlowingEffect
           blur={0}
@@ -256,8 +259,8 @@ const GridItem = ({ area, iconsrc,linkhref, title, data }: GridItemProps) => {
           inactiveZone={0.01}
         />
        <LinkPreview
-          url={linkhref}  className="">  
-          <img src={iconsrc} alt=""  style={{ height: "30px", width: "30px" }}/> 
+          url={linkhref} >  
+         <AnimatedIcon src={iconsrc} style={{ height: "30px", width: "30px" }} />
           </LinkPreview>
             
             </div>
