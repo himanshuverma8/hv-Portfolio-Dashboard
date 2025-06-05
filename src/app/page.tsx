@@ -62,7 +62,7 @@ export default function Page() {
   //the data param accepts an array of objects just to populate the values in grid item component using map method to reduce the code repetation
   //makeSpotifyFirst is a global state variable created using zustand to track if a song is playing and dynamically render the spotify grid at the top if song is playing also show infinite circular animation while song is playing
   // the variable is also used to apply dynamic css to the container to make it responsive.
-  const spotifyPT = makeSpotifyFirst ? "pt-24" : "pt-10";
+  const spotifyPT = makeSpotifyFirst ? "pt-24 animate-pulse" : "pt-10";
   const mainGridPT = makeSpotifyFirst? "pt-8 md:pt-20 lg:pt-24": "pt-24";
   const spotifyTitle = makeSpotifyFirst ? "SpotifyPlaying" : "Spotify";
   // Main Grid
