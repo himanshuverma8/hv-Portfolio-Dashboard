@@ -218,6 +218,17 @@ const Footer: React.FC = () => {
             </DialogFooter>
           </DialogContent>
         </Dialog>
+           <div className="mt-1 text-gray-500 text-[10px]">
+      ui created using{" "}
+      <a
+        href="https://ui.aceternity.com/components"
+        target="_blank"
+        rel="noopener noreferrer"
+        className=" text-blue-500 hover:text-blue-700 transition-colors"
+      >
+        aceternity
+      </a>
+    </div>
       </div>
       <div className="end flex items-center justify-center">
         <a href="mailto:hvinprimary@gmail.com">
