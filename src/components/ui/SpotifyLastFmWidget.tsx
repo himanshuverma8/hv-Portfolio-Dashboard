@@ -1,6 +1,8 @@
+"use client"
 import React, { useState, useEffect } from "react";
 import { fetchNowPlaying, fetchRecentTracks } from "../../utils/spotifyService";
-
+import { useIsPlaying } from "@/app/store/useVisitorStore.ts";
+import toast, { Toaster } from "react-hot-toast";
 interface Song {
   name: string;
   artist: string;
@@ -11,13 +13,22 @@ interface Song {
 const SpotifyLastFmWidget: React.FC = () => {
   const [currentSong, setCurrentSong] = useState<Song | null>(null);
   const [recentSongs, setRecentSongs] = useState<Song[]>([]);
-
+  // setIsPlaying is use to track if a song is playing or not globally.
+  const setIsPlaying = useIsPlaying(state => state.setIsPlaying);
+ 
   useEffect(() => {
     const loadData = async () => {
       try {
         const nowPlaying = await fetchNowPlaying();
-        if (nowPlaying) setCurrentSong(nowPlaying);
-
+        if (nowPlaying){
+          setCurrentSong(nowPlaying);
+          if(nowPlaying?.isPlaying){
+            toast.success(`hv is playing ${nowPlaying.name} on spotify`)
+            setIsPlaying(true);
+          }else{
+            setIsPlaying(false);
+          }
+        }
         const recentTracks = await fetchRecentTracks();
         if (recentTracks) setRecentSongs(recentTracks.slice(0, 3));
       } catch (error) {
@@ -26,7 +37,8 @@ const SpotifyLastFmWidget: React.FC = () => {
     };
 
     loadData();
-    const interval = setInterval(loadData, 3000); 
+    // refresh every 10 secs
+    const interval = setInterval(loadData, 10*1000); 
     return () => clearInterval(interval);
   }, []);
 
