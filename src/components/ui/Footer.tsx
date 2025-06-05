@@ -218,7 +218,7 @@ const Footer: React.FC = () => {
             </DialogFooter>
           </DialogContent>
         </Dialog>
-           <div className="mt-1 text-gray-500 text-[10px]">
+           <div className="mt-1 text-center text-gray-500 text-[10px]">
       ui created using{" "}
       <a
         href="https://ui.aceternity.com/components"
