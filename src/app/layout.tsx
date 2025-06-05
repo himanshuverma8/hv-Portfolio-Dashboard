@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import QueryProvider from "./providers/QueryProvider";
+import Footer from "@/components/ui/Footer";
+import Header from "@/components/ui/Header";
+import { useQuery } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
@@ -25,12 +29,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="https://files.hvin.tech/lighting_logo.png" sizes="any" />
-      </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Toaster /> 
-        {children}
+      {/* by default dark mode class added to root body  */}
+      <body className="dark">
+        {/* query provider is added to provide the react tanstack query to perisist and cache the fetched api data and reduce the loading time seamless updation of ui based on api changes */}
+         <QueryProvider>
+          <Toaster/>
+          {children}
+          
+         </QueryProvider>
       </body>
     </html>
   );

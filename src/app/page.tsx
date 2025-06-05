@@ -120,10 +120,10 @@ export default function Page() {
         linkhref="https://www.linkedin.com/in/himanshuver/"
         title="Linkedin"
         data={[
-          { heading: "Username:", description: "himanshu_ver" },
-          { heading: "Followers:", description: "596" },
-          { heading: "Connections:", description: "496" },
-          { heading: "About:", description: "Hi, There!! I'm pursuing BTech in Information Technology from Madan Mohan Malaviya University of Technology, Gorakhpur. I'm excited to learn more things related to tech that interest me the most." }
+          { heading: "Username:", description: linkedinData ? linkedinData.username : "api error"},
+          { heading: "Followers:", description: linkedinData ? linkedinData.followers : "api error" },
+          { heading: "Connections:", description: linkedinData ? linkedinData.connections : "api error" },
+          { heading: "About:", description: linkedinData ? linkedinData.about : "api error" }
         ]}
       />
       <GridItem

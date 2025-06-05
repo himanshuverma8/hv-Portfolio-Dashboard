@@ -19,7 +19,7 @@ async function fetchGFGData(handle: string) {
 
 // API Route
 export async function GET(req: NextRequest, { params }: { params: { handle: string } }) {
-    const handle = params.handle;
+    const handle = params?.handle;
     const data = await fetchGFGData(handle);
     console.log("api endpoint hit");
     if (data) {

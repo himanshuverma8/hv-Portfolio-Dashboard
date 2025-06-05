@@ -1,5 +1,5 @@
-const API_KEY = "356a558ad9493ea9487f1fc1e4d97d2d"; // Replace with your actual Last.fm API Key
-const USERNAME = "hvin8"; // Replace with your Last.fm username
+const API_KEY = process.env.NEXT_PUBLIC_LASTFM_API_KEY;
+const USERNAME = process.env.NEXT_PUBLIC_LASTFM_USERNAME; 
 const API_URL = "https://ws.audioscrobbler.com/2.0/";
 
 /**

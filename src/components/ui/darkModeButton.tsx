@@ -1,16 +1,28 @@
+"use client"
 import React, { useState, useEffect, CSSProperties } from "react";
 
 interface DarkModeButtonProps {
   style?: CSSProperties; // Optional style prop with CSSProperties type
 }
 
+function getInitialMode(){
+  if(typeof window!==undefined){
+    const saved = localStorage.getItem("theme"); 
+    if(!saved) return true;
+    return (saved==='dark');
+  }
+  return true;
+}
+
 export default function DarkModeButton({ style }: DarkModeButtonProps) {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(getInitialMode);
 
   useEffect(() => {
     if (isDarkMode) {
       document.body.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     } else {
+      localStorage.setItem("theme", "light");
       document.body.classList.remove("dark");
     }
   }, [isDarkMode]);

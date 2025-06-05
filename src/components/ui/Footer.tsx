@@ -1,3 +1,4 @@
+"use client"
 import { useState, useEffect } from "react";
 import ColourfulText from "./colourful-text";
 import axios from "axios";
@@ -96,7 +97,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="flex items-center justify-between bg-transparent w-full mx-auto p-4 dark:bg-transparent shadow-[2px_4px_16px_0px_rgba(248,248,248,0.06)_inset] group">
+    <footer className=" flex items-center justify-between bg-transparent w-full mx-auto p-4 dark:bg-transparent shadow-[2px_4px_16px_0px_rgba(248,248,248,0.06)_inset] group">
       <div className="start flex items-center justify-center gap-2">
         <a href="https://www.instagram.com/hv__in/" target="_blank" rel="noopener noreferrer">
           <svg
@@ -145,7 +146,9 @@ const Footer: React.FC = () => {
               onMouseLeave={(e) => e.currentTarget.classList.remove("text-red-500")}
             >
               Unique Views: {uniqueViews > 0 ? uniqueViews : "fetching..."}
+            
             </button>
+          
           </DialogTrigger>
           <DialogContent className="sm:max-w-[500px] max-h-[80vh] overflow-y-auto">
             <DialogHeader>

@@ -82,7 +82,7 @@ async function fetchGithubStats(username) {
 }
 
 export async function GET(req, { params }) {
-    const handle = params.handle;
+    const handle = params?.handle;
     const data = await fetchGithubStats(handle);
 
     if (data) {
