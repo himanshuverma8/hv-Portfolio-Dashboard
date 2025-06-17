@@ -42,7 +42,9 @@ An interactive, visually appealing **personal dashboard** that dynamically fetch
 ![ip list](https://res.cloudinary.com/de5vcnanx/image/upload/v1750173345/Screenshot_2025-06-17_at_8.44.23_PM_fo9rnk.png)
 ![ip list](https://res.cloudinary.com/de5vcnanx/image/upload/v1750173541/Screenshot_2025-06-17_at_8.44.51_PM_tauoax.png)
 ![ip list](https://res.cloudinary.com/de5vcnanx/image/upload/v1750173541/Screenshot_2025-06-17_at_8.43.36_PM_app8dh.png)
-![Video Walkthrough](https://res.cloudinary.com/de5vcnanx/video/upload/v1750171849/document_6235648955892374043_lycmxt.mp4)
+[▶️ Watch Video Walkthrough](https://res.cloudinary.com/de5vcnanx/video/upload/v1750171849/document_6235648955892374043_lycmxt.mp4)
+
+![Click to watch](https://res.cloudinary.com/de5vcnanx/image/upload/v1750172587/Screenshot_2025-06-17_at_8.31.58_PM_talvnl.png)
 ---
 
 ## 🛠️ Tech Stack  
