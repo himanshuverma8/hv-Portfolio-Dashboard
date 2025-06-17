@@ -19,7 +19,7 @@ import { useIsPlaying } from "./store/useVisitorStore.ts";
 const fetchDataTanStack = async () => {
   const [cf, cc, gh, lc, gfg, li] = await Promise.all([
     fetchCodeforcesStats("himanshu_ver"),
-    fetchCodechefStats("hvin8"),
+    axios.get("/api/codechef/hvin8"),
     axios.get("/api/github/himanshuverma8"),
     axios.get("/api/leetcode/himanshuverma8"),
     axios.get("/api/gfg/himanshu_ver"),
@@ -27,7 +27,7 @@ const fetchDataTanStack = async () => {
   ]);
   return {
     codeforcesData: cf,
-    codechefData: cc,
+    codechefData: cc.data,
     githubData: gh.data,
     leetCodeData: lc.data,
     gfgData: gfg.data,
@@ -45,7 +45,6 @@ export default function Page() {
     const makeSpotifyFirst = useIsPlaying((state)=>state.isPlaying); 
 
   const { codechefData, codeforcesData, githubData, leetCodeData, gfgData, linkedinData } = data || {};
- console.log(linkedinData);
    //loading animation
 
   if (loading) {
@@ -121,8 +120,8 @@ export default function Page() {
         title="Linkedin"
         data={[
           { heading: "Username:", description: linkedinData ? linkedinData.username : "api error"},
-          { heading: "Followers:", description: linkedinData ? linkedinData.followers : "api error" },
-          { heading: "Connections:", description: linkedinData ? linkedinData.connections : "api error" },
+          { heading: "Followers:", description: linkedinData ? `${linkedinData.followers} ` : "api error" },
+          { heading: "Connections:", description: linkedinData ? `${linkedinData.connections} ` : "api error" },
           { heading: "About:", description: linkedinData ? linkedinData.about : "api error" }
         ]}
       />
