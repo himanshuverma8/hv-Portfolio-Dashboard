@@ -35,16 +35,32 @@ An interactive, visually appealing **personal dashboard** that dynamically fetch
 
 ## 📸 Preview  
 
+**Dashboard Screenshot**  
 ![Dashboard Screenshot](https://res.cloudinary.com/de5vcnanx/image/upload/v1750172587/Screenshot_2025-06-17_at_8.31.58_PM_talvnl.png)  
-![spotify live playing](https://res.cloudinary.com/de5vcnanx/image/upload/v1750173323/Screenshot_2025-06-17_at_8.42.38_PM_zqj6po.png)
-![spotify live playing](https://res.cloudinary.com/de5vcnanx/image/upload/v1750173323/Screenshot_2025-06-17_at_8.42.43_PM_w1rr9d.png)
 
+**Spotify Live Playing**  
+![Spotify live playing](https://res.cloudinary.com/de5vcnanx/image/upload/v1750173323/Screenshot_2025-06-17_at_8.42.38_PM_zqj6po.png)
+![Spotify live playing](https://res.cloudinary.com/de5vcnanx/image/upload/v1750173323/Screenshot_2025-06-17_at_8.42.43_PM_w1rr9d.png)
+
+**IP List View**  
 ![ip list](https://res.cloudinary.com/de5vcnanx/image/upload/v1750173345/Screenshot_2025-06-17_at_8.44.23_PM_fo9rnk.png)
 ![ip list](https://res.cloudinary.com/de5vcnanx/image/upload/v1750173541/Screenshot_2025-06-17_at_8.44.51_PM_tauoax.png)
 ![ip list](https://res.cloudinary.com/de5vcnanx/image/upload/v1750173541/Screenshot_2025-06-17_at_8.43.36_PM_app8dh.png)
 
-## video walkthrough
-https://res.cloudinary.com/de5vcnanx/video/upload/v1750171849/document_6235648955892374043_lycmxt.mp4
+**Mobile Preview**  
+![Mobile Screenshot 1](https://res.cloudinary.com/de5vcnanx/image/upload/v1750711321/photo_6253454967339862813_w_urdnln.jpg)
+![Mobile Screenshot 2](https://res.cloudinary.com/de5vcnanx/image/upload/v1750711321/photo_6253454967339862812_w_ho0waw.jpg)
+
+**iPad Preview**  
+![iPad Screenshot 1](https://res.cloudinary.com/de5vcnanx/image/upload/v1750711320/photo_6253454967339862810_y_b3wlt5.jpg)
+![iPad Screenshot 2](https://res.cloudinary.com/de5vcnanx/image/upload/v1750711321/photo_6253454967339862811_y_1_zxru8p.jpg)
+
+---
+
+## 🎬 Video Walkthrough
+
+[![Dashboard Video Walkthrough](https://res.cloudinary.com/de5vcnanx/image/upload/v1750172587/Screenshot_2025-06-17_at_8.31.58_PM_talvnl.png)](https://res.cloudinary.com/de5vcnanx/video/upload/v1750171849/document_6235648955892374043_lycmxt.mp4)
+- **Click the image above or [watch the walkthrough video here](https://res.cloudinary.com/de5vcnanx/video/upload/v1750171849/document_6235648955892374043_lycmxt.mp4).**
 ---
 
 ## 🛠️ Tech Stack  
