@@ -48,12 +48,12 @@ An interactive, visually appealing **personal dashboard** that dynamically fetch
 ![ip list](https://res.cloudinary.com/de5vcnanx/image/upload/v1750173541/Screenshot_2025-06-17_at_8.43.36_PM_app8dh.png)
 
 **Mobile Preview**  
-![Mobile Screenshot 1](https://res.cloudinary.com/de5vcnanx/image/upload/v1750711321/photo_6253454967339862813_w_urdnln.jpg)
-![Mobile Screenshot 2](https://res.cloudinary.com/de5vcnanx/image/upload/v1750711321/photo_6253454967339862812_w_ho0waw.jpg)
+<img src="https://res.cloudinary.com/de5vcnanx/image/upload/v1750711321/photo_6253454967339862813_w_urdnln.jpg" alt="Mobile Screenshot 1" width="200" />
+<img src="https://res.cloudinary.com/de5vcnanx/image/upload/v1750711321/photo_6253454967339862812_w_ho0waw.jpg" alt="Mobile Screenshot 2" width="200" />
 
 **iPad Preview**  
-![iPad Screenshot 1](https://res.cloudinary.com/de5vcnanx/image/upload/v1750711320/photo_6253454967339862810_y_b3wlt5.jpg)
-![iPad Screenshot 2](https://res.cloudinary.com/de5vcnanx/image/upload/v1750711321/photo_6253454967339862811_y_1_zxru8p.jpg)
+<img src="https://res.cloudinary.com/de5vcnanx/image/upload/v1750711320/photo_6253454967339862810_y_b3wlt5.jpg" alt="iPad Screenshot 1" width="250" />
+<img src="https://res.cloudinary.com/de5vcnanx/image/upload/v1750711321/photo_6253454967339862811_y_1_zxru8p.jpg" alt="iPad Screenshot 2" width="250" />
 
 ---
 
