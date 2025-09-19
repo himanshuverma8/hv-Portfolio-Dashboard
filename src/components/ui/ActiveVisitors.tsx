@@ -22,7 +22,6 @@ export default function ActiveVisitors() {
                 await axios.post("/api/save-user-ip", { ip }); // Save to database via API route
                 toast.success(`New visitor joined IP: ${ip}`, { duration: 3000 });
             } catch (error) {
-                console.error("Failed to save visitor:", error);
             }
         });
 

@@ -36,8 +36,8 @@ const SpotifyLastFmWidget: React.FC = () => {
         //   for(const item of recentTracks){
         //     recentTracksSet.add(item);
         // }
-        const uniquerecentTracks = new Map(recentTracks.map(track => [track.url, track]));
-        setRecentSongs(Array.from(uniquerecentTracks.values()))
+        const uniquerecentTracks = new Map(recentTracks.map((track: any) => [track.url, track]));
+        setRecentSongs(Array.from(uniquerecentTracks.values()) as Song[])
         }
       } catch (error) {
         console.error("Error fetching Spotify data:", error);
@@ -51,7 +51,6 @@ const SpotifyLastFmWidget: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  console.log(recentSongs);
 
   return (
     <div className="bg-transparent p-4">

@@ -33,7 +33,6 @@ const Footer: React.FC = () => {
         const response = await axios.get("/api/unique-views");
         setUniqueViews(response.data.totalVisits);
       } catch (error) {
-        console.error("Error fetching unique views:", error);
       }
     };
 
@@ -54,7 +53,6 @@ const Footer: React.FC = () => {
           const totalIPs = await UniqueViewsCount();
           setHasMore(response.data.length < totalIPs);
         } catch (error) {
-          console.error("Error fetching cached IPs:", error);
         } finally {
           setIsLoading(false);
         }
@@ -70,7 +68,6 @@ const Footer: React.FC = () => {
       const response = await axios.get("/api/unique-views");
       return response.data.totalVisits;
     } catch (error) {
-      console.error("Error fetching total IPs:", error);
       return 0;
     }
   };
@@ -90,7 +87,6 @@ const Footer: React.FC = () => {
       setPage((prev) => prev + 1);
       setHasMore(response.data.hasMore);
     } catch (error) {
-      console.error("Error fetching more IPs:", error);
     } finally {
       setIsLoading(false);
     }

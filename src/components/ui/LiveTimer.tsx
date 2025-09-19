@@ -74,12 +74,10 @@ const LiveTimer: React.FC = () => {
           const parsedDate = parseTargetDate(data.data.targetDate);
           setTargetDate(parsedDate);
         } else {
-          console.error('Failed to fetch target date:', data.error);
           // Fallback to default date
           setTargetDate(new Date("2026-05-01T00:00:00"));
         }
       } catch (error) {
-        console.error('Error fetching target date:', error);
         // Fallback to default date
         setTargetDate(new Date("2026-05-01T00:00:00"));
       } finally {
@@ -127,22 +125,31 @@ const LiveTimer: React.FC = () => {
     }, 1000);
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    e.preventDefault();
+    handleClick();
+  };
+
   if (isLoading) {
     return (
       <div ref={root}>
         <div
-          className="timer fixed z-50 cursor-pointer transition-all duration-500 opacity-20 hover:opacity-40"
+          className="timer fixed z-50 cursor-pointer transition-all duration-500 opacity-20 hover:opacity-40 select-none"
           style={{
             left: '50%',
             top: '50%',
-            transform: 'translate(-50%, -50%)'
+            transform: 'translate(-50%, -50%)',
+            touchAction: 'manipulation',
+            WebkitTouchCallout: 'none',
+            WebkitUserSelect: 'none',
+            userSelect: 'none'
           }}
         >
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 shadow-2xl min-w-[280px]">
-            <div className="text-center">
-              <div className="text-white/80 text-lg">Loading...</div>
-            </div>
+        <div className="bg-white/5 dark:bg-white/5 backdrop-blur-md border border-white/10 dark:border-white/10 rounded-2xl p-4 shadow-2xl min-w-[280px]">
+          <div className="text-center">
+            <div className="text-black/80 dark:text-white/80 text-lg">Loading...</div>
           </div>
+        </div>
         </div>
       </div>
     );
@@ -151,44 +158,49 @@ const LiveTimer: React.FC = () => {
   return (
     <div ref={root}>
       <div
-        className={`timer fixed z-50 cursor-pointer transition-all duration-500 ${
+        className={`timer fixed z-50 cursor-pointer transition-all duration-500 select-none ${
           isClicked ? "opacity-80" : "opacity-20 hover:opacity-40"
         }`}
         style={{
           left: '50%',
           top: '50%',
-          transform: 'translate(-50%, -50%)'
+          transform: 'translate(-50%, -50%)',
+          touchAction: 'manipulation',
+          WebkitTouchCallout: 'none',
+          WebkitUserSelect: 'none',
+          userSelect: 'none'
         }}
         onClick={handleClick}
+        onTouchStart={handleTouchStart}
       >
-        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 shadow-2xl hover:bg-white/10 hover:border-white/20 transition-all duration-300 min-w-[280px]">
+        <div className="bg-white/5 dark:bg-white/5 backdrop-blur-md border border-white/10 dark:border-white/10 rounded-2xl p-4 shadow-2xl hover:bg-white/10 dark:hover:bg-white/10 hover:border-white/20 dark:hover:border-white/20 transition-all duration-300 min-w-[280px]">
           <div className="text-center">
             <div className="grid grid-cols-3 gap-2 text-xs">
-              <div className="text-white/80">
+              <div className="text-black/80 dark:text-white/80">
                 <div className="font-bold text-lg">{timeLeft.years}</div>
                 <div className="text-xs">Years</div>
               </div>
-              <div className="text-white/80">
+              <div className="text-black/80 dark:text-white/80">
                 <div className="font-bold text-lg">{timeLeft.months}</div>
                 <div className="text-xs">Months</div>
               </div>
-              <div className="text-white/80">
+              <div className="text-black/80 dark:text-white/80">
                 <div className="font-bold text-lg">{timeLeft.days}</div>
                 <div className="text-xs">Days</div>
               </div>
-              <div className="text-white/80">
+              <div className="text-black/80 dark:text-white/80">
                 <div className="font-bold text-lg">{timeLeft.hours}</div>
                 <div className="text-xs">Hours</div>
               </div>
-              <div className="text-white/80">
+              <div className="text-black/80 dark:text-white/80">
                 <div className="font-bold text-lg">{timeLeft.minutes}</div>
                 <div className="text-xs">Minutes</div>
               </div>
-              <div className="text-white/80">
+              <div className="text-black/80 dark:text-white/80">
                 <div className="font-bold text-lg">{timeLeft.seconds}</div>
                 <div className="text-xs">Seconds</div>
               </div>
-              <div className="text-white/80 col-span-3">
+              <div className="text-black/80 dark:text-white/80 col-span-3">
                 <div className="font-bold text-2xl">{timeLeft.milliseconds.toString().padStart(2, '0')}</div>
                 <div className="text-xs">Centiseconds</div>
               </div>
