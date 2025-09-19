@@ -37,7 +37,7 @@ export const fetchNowPlaying = async () => {
 export const fetchRecentTracks = async () => {
   try {
     const response = await fetch(
-      `${API_URL}?method=user.getrecenttracks&user=${USERNAME}&api_key=${API_KEY}&format=json&limit=5`
+      `${API_URL}?method=user.getrecenttracks&user=${USERNAME}&api_key=${API_KEY}&format=json&limit=10`
     );
     const data = await response.json();
 
