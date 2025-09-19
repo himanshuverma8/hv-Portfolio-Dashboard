@@ -14,6 +14,7 @@ import Header from "@/components/ui/Header";
 import HvCursiveAnimated from "@/components/ui/HvCursiveAnimated";
 import GridItem from "@/components/ui/GridItem";
 import { useIsPlaying } from "./store/useVisitorStore.ts";
+import LiveTimer from "@/components/ui/LiveTimer";
 
 // api utility to fetch all the data from different coding platforms
 const fetchDataTanStack = async () => {
@@ -181,6 +182,7 @@ export default function Page() {
   return (
     <>
       <Header />
+      <LiveTimer />
       <div className="main-container overflow-x-hidden ">
         {makeSpotifyFirst ? (
           <>

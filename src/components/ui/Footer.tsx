@@ -136,7 +136,7 @@ const Footer: React.FC = () => {
       </div>
       <div className="middle flex flex-col items-center justify-center">
         <h1 className="text-xs font-bold text-center text-blue-500 relative z-2 font-sans">
-          © {new Date().getFullYear()} <ColourfulText text="hv" />
+          © {new Date().getFullYear()} <ColourfulText text="hv6.dev" />
         </h1>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>

@@ -1,12 +1,14 @@
 "use client";
 import React, { useEffect, useRef, useState } from 'react';
 import { animate, createScope, createSpring, createDraggable } from 'animejs';
-const LOGO_URL = "https://files.hvin.tech/lighting_logo.png";
+import ConnectionsCard from './ConnectionsCard';
+const LOGO_URL = "https://cdn.hv6.dev/images/logos/lighting_thunderbolt_red.jpg_circular.png?height=100&width=100";
 
 const LogoAnimation: React.FC = () => {
   const root = useRef<HTMLDivElement | null>(null);
   const scope = useRef<any>(null);
   const [rotations, setRotations] = useState(0);
+  const [showConnections, setShowConnections] = useState(false);
 
   useEffect(() => {
     if (!root.current) return;
@@ -47,10 +49,12 @@ const LogoAnimation: React.FC = () => {
       }
       return newRotations;
     });
+    setShowConnections(true);
   };
 
   return (
-    <div ref={root}>
+    <>
+      <div ref={root}>
         <img
           src={LOGO_URL}
           className="logo"
@@ -58,7 +62,12 @@ const LogoAnimation: React.FC = () => {
           style={{ height: "50px", width: "50px" }}
           onClick={handleClick}
         />
-    </div>
+      </div>
+      <ConnectionsCard 
+        isOpen={showConnections} 
+        onClose={() => setShowConnections(false)} 
+      />
+    </>
   );
 };
 
