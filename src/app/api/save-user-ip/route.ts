@@ -11,17 +11,16 @@ const API_KEY = process.env.iptoken;
 
 export async function POST(req: NextRequest) {
   try {
-    const { ip, userId } = await req.json();
+    const { ip } = await req.json();
     
-    if (!userId) {
-      return NextResponse.json({ error: "userId is required" }, { status: 400 });
+    if (!ip) {
+      return NextResponse.json({ error: "ip is required" }, { status: 400 });
     }
     
-    
-    // Check if user already exists by userId (not by IP)
-    const existingUser = await UniqueViews.findOne({ userId });
+    // Check if user already exists by IP
+    const existingUser = await UniqueViews.findOne({ ip });
     if(existingUser){
-        return NextResponse.json({ message: "user already exists" }, { status: 400 });
+        return NextResponse.json({ message: "ip already exists" }, { status: 400 });
     }
     
     const ipResponse = await axios.get(`${IP_API_URL}/${ip}/json?token=${API_KEY}`);
@@ -33,7 +32,6 @@ export async function POST(req: NextRequest) {
 
     const ipDetails = {
       ip,
-      userId, // Add userId to the data
       city: ipData.city || null,
       region: ipData.region || null,
       country: ipData.country || null,
@@ -73,7 +71,6 @@ async function updateRedisCache() {
 
     // Store in Redis permanently only update it when new ip is saved
     await redis.set("recent_ips", serializedIPs);
-
     console.log("Redis cache updated");
   } catch (error) {
     console.error("Error updating Redis cache:", error);

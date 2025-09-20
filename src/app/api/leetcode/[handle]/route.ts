@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 
-async function fetchLeetcodeData(handle) {
+async function fetchLeetcodeData(handle: string) {
     try {
         // Fetching data from LeetCode API
         const [solvedData, contestData, submissionsData] = await Promise.all([
@@ -12,15 +12,15 @@ async function fetchLeetcodeData(handle) {
 
         // Extract solved problems data
         const solvedStats = solvedData.data.submitStats.acSubmissionNum;
-        const totalSolved = solvedStats.find(stat => stat.difficulty === "All")?.count || 0;
-        const easySolved = solvedStats.find(stat => stat.difficulty === "Easy")?.count || 0;
-        const mediumSolved = solvedStats.find(stat => stat.difficulty === "Medium")?.count || 0;
-        const hardSolved = solvedStats.find(stat => stat.difficulty === "Hard")?.count || 0;
+        const totalSolved = solvedStats.find((stat: any) => stat.difficulty === "All")?.count || 0;
+        const easySolved = solvedStats.find((stat: any) => stat.difficulty === "Easy")?.count || 0;
+        const mediumSolved = solvedStats.find((stat: any) => stat.difficulty === "Medium")?.count || 0;
+        const hardSolved = solvedStats.find((stat: any) => stat.difficulty === "Hard")?.count || 0;
         const solvedString = `${totalSolved} | ${easySolved} (easy) | ${mediumSolved} (medium) | ${hardSolved} (hard)`;
 
         // Extract max rating from contest history
         const history = contestData.data?.userContestRankingHistory || [];
-        const maxRating = history.length > 0 ? Math.max(...history.map(h => h.rating)) : 0;
+        const maxRating = history.length > 0 ? Math.max(...history.map((h: any) => h.rating)) : 0;
         const topPercentage = contestData.data?.userContestRanking?.topPercentage || 0;
 
         // Extract last submission and timestamp
@@ -35,7 +35,7 @@ async function fetchLeetcodeData(handle) {
 }
 
 // API Route
-export async function GET(req, { params }) {
+export async function GET(req: NextRequest, { params }: { params: { handle: string } }) {
     const handle = params.handle;
     const data = await fetchLeetcodeData(handle);
 

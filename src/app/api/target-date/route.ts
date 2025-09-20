@@ -27,7 +27,6 @@ export async function GET() {
       }
     });
   } catch (error) {
-    console.error('Error fetching target date:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to fetch target date' },
       { status: 500 }

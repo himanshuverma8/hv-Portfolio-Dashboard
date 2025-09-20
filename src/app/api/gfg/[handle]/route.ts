@@ -21,7 +21,6 @@ async function fetchGFGData(handle: string) {
 export async function GET(req: NextRequest, { params }: { params: { handle: string } }) {
     const handle = params?.handle;
     const data = await fetchGFGData(handle);
-    console.log("api endpoint hit");
     if (data) {
         return NextResponse.json(data);
     } else {

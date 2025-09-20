@@ -4,7 +4,6 @@ import axios from "axios";
 async function fetchCodechefData(handle: string) {
     try {
       const response = await axios.get(`https://codechef-serverlessapi-vercel.vercel.app/handle/${handle}`);
-            // console.log(response)
             const data = response.data; // Extracting actual data
             const maxRating = `${data.highestRating}  (${data.stars})`;
     
@@ -36,7 +35,7 @@ async function fetchCodechefData(handle: string) {
                 lastContestTime // Now using the last index
             };
     } catch (error) {
-        console.error("Error fetching GFG stats:", error);
+        console.error("Error fetching CodeChef stats:", error);
         return null;
     }
 }

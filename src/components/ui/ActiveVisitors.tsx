@@ -43,7 +43,7 @@ export default function ActiveVisitors() {
                 
                 // Only save IP for new users
                 if (isNewUser) {
-                    await axios.post("/api/save-user-ip", { ip, userId });
+                    await axios.post("/api/save-user-ip", { ip });
                 }
                 
                 toast.success(`New visitor joined!`, { duration: 3000 });

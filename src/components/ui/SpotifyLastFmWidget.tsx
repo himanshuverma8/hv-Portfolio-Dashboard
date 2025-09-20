@@ -40,7 +40,6 @@ const SpotifyLastFmWidget: React.FC = () => {
         setRecentSongs(Array.from(uniquerecentTracks.values()) as Song[])
         }
       } catch (error) {
-        console.error("Error fetching Spotify data:", error);
       }
     };
    

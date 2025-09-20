@@ -66,7 +66,7 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const userId = searchParams.get('userId');
-    console.log(userId);
+    console.log("Checking user token:", userId);
 
     if (!userId) {
       return NextResponse.json(

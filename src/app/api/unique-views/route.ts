@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import UniqueViews from "@/model/UniqueViews";
 import { connect } from "@/dbConfig/dbConfig";
 
-export async function GET(req) {
+export async function GET(req: NextRequest) {
   try {
     await connect();
 

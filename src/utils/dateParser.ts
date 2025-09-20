@@ -77,7 +77,6 @@ export function parseTargetDate(dateString: string): Date {
   // Check if the date is in the future
   const now = new Date();
   if (parsedDate <= now) {
-    console.warn(`Warning: Target date ${dateString} is in the past or present`);
   }
   
   return parsedDate;

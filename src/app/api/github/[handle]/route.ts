@@ -46,7 +46,7 @@ async function fetchGithubStats(username) {
                 );
                 totalCommits += commits.length;
             } catch (commitError) {
-                console.warn(`Could not fetch commits for ${repo.name}:, commitError.message`);
+                console.warn(`Could not fetch commits for ${repo.name}:`, commitError.message);
             }
         }));
 

@@ -23,8 +23,8 @@ export async function GET(req: NextRequest) {
 
     // Save to cache for 5 minutes (300 seconds)
     await redis.set("recent_ips", recentIPs);
-
     console.log("Fetched from MongoDB and updated Redis cache");
+
     return NextResponse.json(recentIPs);
   } catch (error) {
     console.error("Error fetching IPs:", error);

@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
 const uniqueViewsSchema = new mongoose.Schema(
   {
-    ip: { type: String, required: true },
-    userId: { type: String, required: true, unique: true, index: true },
+    ip: { type: String, required: true, unique: true, index: true },
     city: String,
     region: String,
     country: String,
