@@ -4,9 +4,53 @@ import { io } from "socket.io-client";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useVisitorStore } from "@/app/store/useVisitorStore.ts";
+import { generateUserId, getUserToken, setUserToken, isValidUUID } from "@/utils/userTokenManager";
 
 export default function ActiveVisitors() {
     const {activeUsers, setActiveUsers} = useVisitorStore();
+
+    // Function to handle user identification and database saving
+    const handleUserVisit = async (ip: string) => {
+        try {
+            // Get existing user token from browser
+            let userId = getUserToken();
+            
+            // Check if token exists and is valid
+            if (!userId || !isValidUUID(userId)) {
+                // Generate new UUID if no valid token exists
+                userId = generateUserId();
+                setUserToken(userId);
+            }
+
+            // Check if user exists in database
+            const checkResponse = await axios.get(`/api/user-token?userId=${userId}`);
+            
+            if (checkResponse.data.success && checkResponse.data.exists) {
+                // User exists in DB - update visit
+                await axios.post("/api/user-token", { 
+                    userId, 
+                    ip,
+                    locationData: {} // You can add location data here if needed
+                });
+                toast.success(`Welcome back!`, { duration: 2000 });
+            } else {
+                // User doesn't exist in DB - create new user
+                await axios.post("/api/user-token", { 
+                    userId, 
+                    ip,
+                    locationData: {} // You can add location data here if needed
+                });
+                toast.success(`New visitor joined!`, { duration: 3000 });
+            }
+        } catch (error) {
+            // If API fails, still try to save with basic IP approach
+            try {
+                await axios.post("/api/save-user-ip", { ip });
+            } catch (fallbackError) {
+                // Silent fail for fallback
+            }
+        }
+    };
 
     useEffect(() => {
         const socket = io("https://real-time-active-visitors-count-backend.onrender.com/", { transports: ["websocket"] });
@@ -17,13 +61,7 @@ export default function ActiveVisitors() {
         });
 
         // Listen for new user connections
-        socket.on("new-user", async (ip) => {
-            try {
-                await axios.post("/api/save-user-ip", { ip }); // Save to database via API route
-                toast.success(`New visitor joined IP: ${ip}`, { duration: 3000 });
-            } catch (error) {
-            }
-        });
+        socket.on("new-user", handleUserVisit);
 
         return () => {
             socket.disconnect();
