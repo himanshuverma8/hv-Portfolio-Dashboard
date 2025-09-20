@@ -14,12 +14,14 @@ export default function ActiveVisitors() {
         try {
             // Get existing user token from browser
             let userId = getUserToken();
+            let isNewUser = false;
             
             // Check if token exists and is valid
             if (!userId || !isValidUUID(userId)) {
                 // Generate new UUID if no valid token exists
                 userId = generateUserId();
                 setUserToken(userId);
+                isNewUser = true;
             }
 
             // Check if user exists in database
@@ -28,27 +30,26 @@ export default function ActiveVisitors() {
             if (checkResponse.data.success && checkResponse.data.exists) {
                 // User exists in DB - update visit
                 await axios.post("/api/user-token", { 
-                    userId, 
-                    ip,
+                    userId,
                     locationData: {} // You can add location data here if needed
                 });
                 toast.success(`Welcome back!`, { duration: 2000 });
             } else {
                 // User doesn't exist in DB - create new user
                 await axios.post("/api/user-token", { 
-                    userId, 
-                    ip,
+                    userId,
                     locationData: {} // You can add location data here if needed
                 });
+                
+                // Only save IP for new users
+                if (isNewUser) {
+                    await axios.post("/api/save-user-ip", { ip });
+                }
+                
                 toast.success(`New visitor joined!`, { duration: 3000 });
             }
         } catch (error) {
-            // If API fails, still try to save with basic IP approach
-            try {
-                await axios.post("/api/save-user-ip", { ip });
-            } catch (fallbackError) {
-                // Silent fail for fallback
-            }
+            // Silent fail
         }
     };
 

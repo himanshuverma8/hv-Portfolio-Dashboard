@@ -5,14 +5,14 @@ import UniqueViews from '@/model/UniqueViews';
 
 connect();
 
-// POST - Handle user token and IP saving
+// POST - Handle user token saving (IP handled separately)
 export async function POST(request: Request) {
   try {
-    const { userId, ip, locationData } = await request.json();
+    const { userId, locationData } = await request.json();
 
-    if (!userId || !ip) {
+    if (!userId) {
       return NextResponse.json(
-        { success: false, error: 'userId and ip are required' },
+        { success: false, error: 'userId is required' },
         { status: 400 }
       );
     }
@@ -24,7 +24,6 @@ export async function POST(request: Request) {
       // User exists - update last visit and visit count
       existingUser.lastVisit = new Date();
       existingUser.visitCount += 1;
-      existingUser.ip = ip; // Update IP in case it changed
       
       // Update location data if provided
       if (locationData) {
@@ -39,21 +38,13 @@ export async function POST(request: Request) {
         message: 'User visit updated'
       });
     } else {
-      // New user - create new token record
+      // New user - create new token record (without IP)
       const newUser = await UserToken.create({
         userId,
-        ip,
         ...locationData,
         firstVisit: new Date(),
         lastVisit: new Date(),
         visitCount: 1
-      });
-
-      // Also save to UniqueViews for backward compatibility
-      await UniqueViews.create({
-        userId,
-        ip,
-        ...locationData
       });
 
       return NextResponse.json({

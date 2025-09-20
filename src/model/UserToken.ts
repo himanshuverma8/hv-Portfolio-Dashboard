@@ -2,7 +2,6 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IUserToken extends Document {
   userId: string;
-  ip: string;
   city?: string;
   region?: string;
   country?: string;
@@ -25,7 +24,6 @@ const UserTokenSchema: Schema = new Schema(
       unique: true,
       index: true 
     },
-    ip: { type: String, required: true },
     city: String,
     region: String,
     country: String,
