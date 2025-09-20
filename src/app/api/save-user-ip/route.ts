@@ -11,12 +11,19 @@ const API_KEY = process.env.iptoken;
 
 export async function POST(req: NextRequest) {
   try {
-    const { ip } = await req.json();
-    console.log(ip);
-    const existingUser = await UniqueViews.findOne({ ip });
-    if(existingUser){
-        return NextResponse.json({ message: "ip already exists" }, { status: 400 });
+    const { ip, userId } = await req.json();
+    
+    if (!userId) {
+      return NextResponse.json({ error: "userId is required" }, { status: 400 });
     }
+    
+    
+    // Check if user already exists by userId (not by IP)
+    const existingUser = await UniqueViews.findOne({ userId });
+    if(existingUser){
+        return NextResponse.json({ message: "user already exists" }, { status: 400 });
+    }
+    
     const ipResponse = await axios.get(`${IP_API_URL}/${ip}/json?token=${API_KEY}`);
     const ipData = ipResponse.data;
     
@@ -26,6 +33,7 @@ export async function POST(req: NextRequest) {
 
     const ipDetails = {
       ip,
+      userId, // Add userId to the data
       city: ipData.city || null,
       region: ipData.region || null,
       country: ipData.country || null,
@@ -35,15 +43,12 @@ export async function POST(req: NextRequest) {
       timezone: ipData.timezone || null,
     };
 
+    const newUser = new UniqueViews(ipDetails);
+    await newUser.save();
+
+    // Update Redis cache with the 100 most recent IPs
+    await updateRedisCache();
     
-
-    if (!existingUser) {
-      const newUser = new UniqueViews(ipDetails);
-      await newUser.save();
-
-      // Update Redis cache with the 100 most recent IPs
-      await updateRedisCache();
-    }
     return NextResponse.json({ message: "IP details saved successfully" }, { status: 201 });
   } catch (error) {
     console.error("Error saving IP:", error);
