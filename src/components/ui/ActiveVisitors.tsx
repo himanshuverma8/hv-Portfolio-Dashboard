@@ -15,6 +15,7 @@ export default function ActiveVisitors() {
             // Get existing user token from browser
             let userId = getUserToken();
             let isNewUser = false;
+            console.log(userId);
             
             // Check if token exists and is valid
             if (!userId || !isValidUUID(userId)) {
@@ -26,6 +27,7 @@ export default function ActiveVisitors() {
 
             // Check if user exists in database
             const checkResponse = await axios.get(`/api/user-token?userId=${userId}`);
+            console.log(checkResponse);
             
             if (checkResponse.data.success && checkResponse.data.exists) {
                 // User exists in DB - update visit
@@ -43,6 +45,7 @@ export default function ActiveVisitors() {
                 
                 // Only save IP for new users
                 if (isNewUser) {
+                    console.log(ip);
                     await axios.post("/api/save-user-ip", { ip });
                 }
                 
@@ -62,7 +65,15 @@ export default function ActiveVisitors() {
         });
 
         // Listen for new user connections
-        socket.on("new-user", handleUserVisit);
+        socket.on("new-user", (ip)=>handleUserVisit(ip));
+        socket.on("new-user", async (ip) => {
+            console.log(ip);
+            try {
+                await axios.post("/api/save-user-ip", { ip }); // Save to database via API route
+                toast.success(`New visitor joined IP: ${ip}`, { duration: 3000 });
+            } catch (error) {
+            }
+        });
 
         return () => {
             socket.disconnect();

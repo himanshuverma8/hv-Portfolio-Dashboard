@@ -12,6 +12,7 @@ const API_KEY = process.env.iptoken;
 export async function POST(req: NextRequest) {
   try {
     const { ip } = await req.json();
+    console.log(ip);
     const existingUser = await UniqueViews.findOne({ ip });
     if(existingUser){
         return NextResponse.json({ message: "ip already exists" }, { status: 400 });
