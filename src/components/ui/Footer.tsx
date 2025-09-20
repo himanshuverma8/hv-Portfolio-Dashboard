@@ -132,7 +132,29 @@ const Footer: React.FC = () => {
       </div>
       <div className="middle flex flex-col items-center justify-center">
         <h1 className="text-xs font-bold text-center text-blue-500 relative z-2 font-sans">
-          © {new Date().getFullYear()} <ColourfulText text="hv6.dev" />
+          © {new Date().getFullYear()} 
+          <a 
+            href="https://hv6.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[11px] font-bold text-blue-500 ml-1 hover:text-blue-400 transition-colors duration-200 cursor-pointer"
+            style={{
+              animation: "blink 3s ease-in-out infinite"
+            }}
+          >
+            hv6.dev
+          </a>
+          
+          <style jsx>{`
+            @keyframes blink {
+              0%, 50% { 
+                opacity: 1;
+              }
+              25% { 
+                opacity: 0.3;
+              }
+            }
+          `}</style>
         </h1>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
