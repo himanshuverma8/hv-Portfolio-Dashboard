@@ -70,7 +70,7 @@ export default function Page() {
     <ul className={`${mainGridPT} grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:max-h-[34rem] xl:grid-rows-2`}>
       <GridItem
         area="md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]"
-        iconsrc="https://files.hvin.tech/github.svg"
+        iconsrc="https://cdn.hv6.dev/images/logos/github.svg"
         linkhref="https://github.com/himanshuverma8"
         title="Github"
         data={[
@@ -90,7 +90,7 @@ export default function Page() {
       />
       <GridItem
         area="md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]"
-        iconsrc="https://files.hvin.tech/codechef.png"
+        iconsrc="https://cdn.hv6.dev/images/logos/codechef.png"
         title="Codechef"
         linkhref="https://www.codechef.com/users/hvin8"
         data={[
@@ -102,7 +102,7 @@ export default function Page() {
       />
       <GridItem
         area="md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]"
-        iconsrc="https://files.hvin.tech/codeforces.png"
+        iconsrc="https://cdn.hv6.dev/images/logos/codeforces.png"
         linkhref="https://codeforces.com/profile/himanshu_ver"
         title="Codeforces"
         data={[
@@ -116,7 +116,7 @@ export default function Page() {
       />
       <GridItem
         area="md:[grid-area:2/7/3/13] xl:[grid-area:1/8/2/13]"
-        iconsrc="https://files.hvin.tech/linkedin.png"
+        iconsrc="https://cdn.hv6.dev/images/logos/linkedin.png"
         linkhref="https://www.linkedin.com/in/himanshuver/"
         title="Linkedin"
         data={[
@@ -128,7 +128,7 @@ export default function Page() {
       />
       <GridItem
         area="md:[grid-area:3/1/4/13] xl:[grid-area:2/8/3/13]"
-        iconsrc="https://files.hvin.tech/gfg.png"
+        iconsrc="https://cdn.hv6.dev/images/logos/gfg.png"
         linkhref="https://www.geeksforgeeks.org/user/himanshu_ver/"
         title="GFG"
         data={[
@@ -146,7 +146,7 @@ export default function Page() {
     <ul className="pt-10 grid grid-cols-1 gap-4 md:grid-cols-12 lg:gap-4 xl:max-h-[34rem]">
       <GridItem
         area="md:[grid-area:1/1/2/13] xl:[grid-area:1/1/2/13]" // Occupies all 12 columns
-        iconsrc="https://files.hvin.tech/leetcode.png"
+        iconsrc="https://cdn.hv6.dev/images/logos/leetcode.png"
         linkhref="https://leetcode.com/himanshuverma8/"
         title="LeetCode"
         data={[
@@ -168,7 +168,7 @@ export default function Page() {
     <ul className={`${spotifyPT} grid grid-cols-1 gap-4 md:grid-cols-12 lg:gap-4 xl:max-h-[34rem]`}>
       <GridItem
         area="md:[grid-area:1/1/2/13] xl:[grid-area:1/1/2/13]" // Occupies all 12 columns
-        iconsrc="https://files.hvin.tech/spotify.svg"
+        iconsrc="https://cdn.hv6.dev/images/logos/spotify.svg"
         linkhref="https://open.spotify.com/playlist/1VgdBB6b6ule86Qmdp1jYz"
         title={spotifyTitle}
         data={[

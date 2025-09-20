@@ -46,7 +46,7 @@ export default function ActiveVisitors() {
                     await axios.post("/api/save-user-ip", { ip });
                 }
                 
-                toast.success(`New visitor joined!`, { duration: 3000 });
+                toast.success(`New visitor joined! ip: ${ip}`, { duration: 3000 });
             }
         } catch (error) {
             // Silent fail
