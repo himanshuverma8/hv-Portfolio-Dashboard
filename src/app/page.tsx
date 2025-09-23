@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 import SpotifyPlayer from "@/components/ui/SpotifyLastFmWidget";
-import fetchCodeforcesStats from "../utils/codeforcesApi";
+// import fetchCodeforcesStats from "../utils/codeforcesApi"; // moved to backend route
 import { CardTechStack } from "@/components/ui/card";
 import axios from "axios";
 import Footer from "@/components/ui/Footer";
@@ -18,7 +18,7 @@ import LiveTimer from "@/components/ui/LiveTimer";
 // api utility to fetch all the data from different coding platforms
 const fetchDataTanStack = async () => {
   const [cf, cc, gh, lc, gfg, li] = await Promise.all([
-    fetchCodeforcesStats("himanshu_ver"),
+    axios.get("/api/codeforces/himanshu_ver"),
     axios.get("/api/codechef/hvin8"),
     axios.get("/api/github/himanshuverma8"),
     axios.get("/api/leetcode/himanshuverma8"),
@@ -26,7 +26,7 @@ const fetchDataTanStack = async () => {
     axios.get("/api/linkedin")
   ]);
   return {
-    codeforcesData: cf,
+    codeforcesData: cf.data,
     codechefData: cc.data,
     githubData: gh.data,
     leetCodeData: lc.data,

@@ -7,7 +7,7 @@ import HeatmapBar from './HeatmapBar'
 
 type Props = {}
 
-const Header = (props: Props) => {
+const Header = ({data}: {data: any}) => {
     return (
         <header>
             <div className="logo-icon absolute top-5 left-4 w-fit rounded-full border-gray-600 p-0.5">
@@ -20,7 +20,7 @@ const Header = (props: Props) => {
                 <LogoAnimation />
             </div>
             <ActiveVisitors />
-            <HeatmapBar />
+            <HeatmapBar data={data} />
             <DarkModeButton style={{ position: 'absolute', top: '20px', right: '16px' }} />
         </header>
     )
