@@ -3,6 +3,7 @@ import { GlowingEffectInfinite } from './glowing-effect-without-mouse-hover'
 import LogoAnimation from './LogoAnimation'
 import ActiveVisitors from './ActiveVisitors'
 import DarkModeButton from './darkModeButton'
+import HeatmapBar from './HeatmapBar'
 
 type Props = {}
 
@@ -19,6 +20,7 @@ const Header = (props: Props) => {
                 <LogoAnimation />
             </div>
             <ActiveVisitors />
+            <HeatmapBar />
             <DarkModeButton style={{ position: 'absolute', top: '20px', right: '16px' }} />
         </header>
     )

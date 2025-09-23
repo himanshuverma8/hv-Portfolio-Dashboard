@@ -4,7 +4,6 @@ import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 import SpotifyPlayer from "@/components/ui/SpotifyLastFmWidget";
 import fetchCodeforcesStats from "../utils/codeforcesApi";
-import fetchCodechefStats from "../utils/codechefApi";
 import { CardTechStack } from "@/components/ui/card";
 import axios from "axios";
 import Footer from "@/components/ui/Footer";
@@ -181,7 +180,7 @@ export default function Page() {
   // Conditional rendering: Spotify at top or bottom
   return (
     <>
-      <Header />
+      <Header data={data} />
       <LiveTimer />
       <div className="main-container overflow-x-hidden ">
         {makeSpotifyFirst ? (
