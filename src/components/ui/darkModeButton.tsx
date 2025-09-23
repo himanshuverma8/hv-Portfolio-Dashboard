@@ -33,7 +33,7 @@ export default function DarkModeButton({ style }: DarkModeButtonProps) {
 
   return (
     /* From Uiverse.io by jubayer-10 */
-    <label style={style} className="inline-flex items-center relative">
+    <label style={style} className="inline-flex items-center relative opacity-40">
       <input
         className="peer hidden"
         id="toggle"
