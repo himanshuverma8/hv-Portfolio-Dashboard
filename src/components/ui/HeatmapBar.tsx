@@ -5,11 +5,11 @@ import dayjs from "dayjs";
 export default function HeatmapBar({data}: {data: any}) {
     // Accept pre-fetched data via props. No API calls here.
     const githubRecent = data?.githubData?.recentCommitTime ?? data?.github?.recentCommitTime;
-    const leetcodeRecentUnix = data?.leetCodeData?.lastSubmissionTime ?? data?.leetcode?.lastSubmissionTime;
+    const leetcodeRecentUnix = data?.leetCodeData?.lastSubmissionTime ?? Number(data?.leetcode?.lastSubmissionTime);
     const codeforcesRecent = data?.codeforcesData?.lastSubmission?.timestamp ?? data?.codeforces?.lastSubmission?.timestamp;
 
     const githubDone = useMemo(() => !!githubRecent && dayjs(githubRecent).isSame(dayjs(), "day"), [githubRecent]);
-    const leetcodeDone = useMemo(() => typeof leetcodeRecentUnix === "number" && dayjs.unix(leetcodeRecentUnix).isSame(dayjs(), "day"), [leetcodeRecentUnix]);
+    const leetcodeDone = useMemo(() => !!leetcodeRecentUnix && dayjs.unix(leetcodeRecentUnix).isSame(dayjs(), "day"), [leetcodeRecentUnix]);
     const codeforcesDone = useMemo(() => !!codeforcesRecent && dayjs(codeforcesRecent).isSame(dayjs(), "day"), [codeforcesRecent]);
 
     const fillPercent = useMemo(() => {
