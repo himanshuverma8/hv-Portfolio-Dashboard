@@ -17,7 +17,7 @@ import LiveTimer from "@/components/ui/LiveTimer";
 
 // api utility to fetch all the data from different coding platforms
 const fetchDataTanStack = async () => {
-  const [cf, cc, gh, lc, gfg, li] = await Promise.all([
+  const [cf, cc, gh, lc, gfg, li] = await Promise.allSettled([
     axios.get("/api/codeforces/himanshu_ver"),
     axios.get("/api/codechef/hvin8"),
     axios.get("/api/github/himanshuverma8"),
@@ -26,12 +26,12 @@ const fetchDataTanStack = async () => {
     axios.get("/api/linkedin")
   ]);
   return {
-    codeforcesData: cf.data,
-    codechefData: cc.data,
-    githubData: gh.data,
-    leetCodeData: lc.data,
-    gfgData: gfg.data,
-    linkedinData: li.data
+    codeforcesData: cf.status === 'fulfilled' ? cf.value.data : null,
+    codechefData: cc.status === 'fulfilled' ? cc.value.data : null,
+    githubData: gh.status === 'fulfilled' ? gh.value.data : null,
+    leetCodeData: lc.status === 'fulfilled' ? lc.value.data : null,
+    gfgData: gfg.status === 'fulfilled' ? gfg.value.data : null,
+    linkedinData: li.status === 'fulfilled' ? li.value.data : null
   };
 };
 
@@ -74,16 +74,16 @@ export default function Page() {
         title="Github"
         data={[
           { heading: "Username:", description: "himanshuverma8" },
-          { heading: "Followers:", description: githubData ? githubData.followers : "fetching from api..." },
-          { heading: "Following:", description: githubData ? githubData.following : "fetching from api..." },
-          { heading: "Repos:", description: githubData ? githubData.publicRepos + githubData.privateRepos : "fetching from api..." },
-          { heading: "Recent Updated Repo:", description: githubData ? githubData.recentRepo : "fetching from api..." },
-          { heading: "Total Commits:", description: githubData ? githubData.totalCommits : "fetching from api..." },
+          { heading: "Followers:", description: githubData ? githubData.followers : "api error" },
+          { heading: "Following:", description: githubData ? githubData.following : "api error" },
+          { heading: "Repos:", description: githubData ? githubData.publicRepos + githubData.privateRepos : "api error" },
+          { heading: "Recent Updated Repo:", description: githubData ? githubData.recentRepo : "api error" },
+          { heading: "Total Commits:", description: githubData ? githubData.totalCommits : "api error" },
           {
             heading: "Recent Commit:",
             description: githubData
               ? `${githubData.recentCommit} (${dayjs(githubData.recentCommitTime).fromNow()})`
-              : "fetching from api..."
+              : "api error"
           }
         ]}
       />
@@ -94,9 +94,9 @@ export default function Page() {
         linkhref="https://www.codechef.com/users/hvin8"
         data={[
           { heading: "Username:", description: "hvin8" },
-          { heading: "MaxRating:", description: codechefData ? codechefData.maxRating : "fetching from api..." },
-          { heading: "Last Contest:", description: codechefData ? `${codechefData.lastContest} (${dayjs(codechefData.lastContestTime).fromNow()})` : "fetching from api..." },
-          { heading: "Best Rank:", description: codechefData ? `${codechefData.bestRankWithContest} ` : "fetching from api..." }
+          { heading: "MaxRating:", description: codechefData ? codechefData.maxRating : "api error" },
+          { heading: "Last Contest:", description: codechefData ? `${codechefData.lastContest} (${dayjs(codechefData.lastContestTime).fromNow()})` : "api error" },
+          { heading: "Best Rank:", description: codechefData ? `${codechefData.bestRankWithContest} ` : "api error" }
         ]}
       />
       <GridItem
@@ -106,11 +106,11 @@ export default function Page() {
         title="Codeforces"
         data={[
           { heading: "Username:", description: "himanshu_ver" },
-          { heading: "MaxRating:", description: codeforcesData ? codeforcesData.maxRatingWithRank : "api error..." },
-          { heading: "Solved:", description: codeforcesData ? codeforcesData.totalSolved : "api error..." },
-          { heading: "Friends Of:", description: codeforcesData ? codeforcesData.friendsCount : "api error..." },
-          { heading: "Best Rank:", description: codeforcesData ? `${codeforcesData.bestRank} | ${codeforcesData.bestContest}` : "fetching from api..." },
-          { heading: "Last Submission:", description: codeforcesData ? `${codeforcesData.lastSubmission.title} (${dayjs(codeforcesData.lastSubmission.timestamp).fromNow()})` : "fetching from api..." }
+          { heading: "MaxRating:", description: codeforcesData ? codeforcesData.maxRatingWithRank : "api error" },
+          { heading: "Solved:", description: codeforcesData ? codeforcesData.totalSolved : "api error" },
+          { heading: "Friends Of:", description: codeforcesData ? codeforcesData.friendsCount : "api error" },
+          { heading: "Best Rank:", description: codeforcesData ? `${codeforcesData.bestRank} | ${codeforcesData.bestContest}` : "api error" },
+          { heading: "Last Submission:", description: codeforcesData ? `${codeforcesData.lastSubmission.title} (${dayjs(codeforcesData.lastSubmission.timestamp).fromNow()})` : "api error" }
         ]}
       />
       <GridItem
@@ -132,9 +132,9 @@ export default function Page() {
         title="GFG"
         data={[
           { heading: "Username:", description: "himanshu_ver" },
-          { heading: "Solved:", description: gfgData ? gfgData.totalProblemsSolved : "fetching from api..." },
-          { heading: "MaxStreak:", description: gfgData ? gfgData.currentStreak : "fetching from api..." },
-          { heading: "Coding Score:", description: gfgData ? gfgData.codingScore : "fetching from api..." }
+          { heading: "Solved:", description: gfgData ? gfgData.totalProblemsSolved : "api error" },
+          { heading: "MaxStreak:", description: gfgData ? gfgData.currentStreak : "api error" },
+          { heading: "Coding Score:", description: gfgData ? gfgData.codingScore : "api error" }
         ]}
       />
     </ul>
@@ -150,12 +150,12 @@ export default function Page() {
         title="LeetCode"
         data={[
           { heading: "Username:", description: "himanshuverma8" },
-          { heading: "MaxRating:", description: leetCodeData ? leetCodeData.maxRating : "fetching from api..." },
-          { heading: "Solved:", description: leetCodeData ? leetCodeData.solvedString : "fetching from api..." },
-          { heading: "Top%:", description: leetCodeData ? leetCodeData.topPercentage : "fetching from api..." },
+          { heading: "MaxRating:", description: leetCodeData ? leetCodeData.maxRating : "api error" },
+          { heading: "Solved:", description: leetCodeData ? leetCodeData.solvedString : "api error" },
+          { heading: "Top%:", description: leetCodeData ? leetCodeData.topPercentage : "api error" },
           {
             heading: "Last Submission:",
-            description: leetCodeData ? `${leetCodeData.lastSubmission} (${dayjs.unix(leetCodeData.lastSubmissionTime).fromNow()})` : "fetching from api..."
+            description: leetCodeData ? `${leetCodeData.lastSubmission} (${dayjs.unix(leetCodeData.lastSubmissionTime).fromNow()})` : "api error"
           }
         ]}
       />
