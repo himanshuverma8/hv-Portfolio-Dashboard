@@ -55,7 +55,7 @@ export default function Page() {
     );
   }
 
-  console.log(gfgData);
+  // console.log(gfgData);
   //the spotify playing widget i created when i see that discord has this feature i thought of implementing this in my project
   //the hv cursive animation is created using svg path animation using gsap i used text to svg converter to get the svg path for both the letters and then animated it using gsap i got to see this animation in anime js library from there i thought to create this
   //the grid layout is created using the components of https://ui.aceternity.com/components i have modified them according to my usecase and added custom params and value for populating it in the ui
